@@ -1,0 +1,4900 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tinder Imob — WB Negócios Imobiliários</title>
+<style>
+:root{
+  --pink:#fd267a; --orange:#ff7854; --grad:linear-gradient(135deg,#ff7854 0%,#fd267a 100%);
+  --grad-soft:linear-gradient(135deg,#ff9a6c 0%,#fd5b94 100%);
+  --ink:#1f2433; --muted:#6b7280; --line:#e8eaf0; --bg:#f4f5f9; --card:#ffffff;
+  --green:#16a34a; --amber:#f59e0b; --red:#ef4444; --blue:#2563eb;
+  --shadow:0 10px 30px rgba(31,36,51,.12); --shadow-sm:0 2px 8px rgba(31,36,51,.08);
+  --r:18px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  color:var(--ink);background:var(--bg);line-height:1.45;-webkit-font-smoothing:antialiased}
+a{color:var(--pink)}
+.wrap{max-width:1280px;margin:0 auto;padding:18px}
+
+/* HEADER */
+header.top{background:var(--grad);color:#fff;border-radius:22px;padding:20px 24px;box-shadow:var(--shadow);
+  display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:14px}
+.flame{width:52px;height:52px;border-radius:15px;background:rgba(255,255,255,.18);display:grid;place-items:center;font-size:30px;backdrop-filter:blur(4px)}
+.brand h1{margin:0;font-size:26px;letter-spacing:.5px;font-weight:800}
+.brand .sub{font-size:13px;opacity:.92;margin-top:2px}
+.hstats{display:flex;gap:10px;flex-wrap:wrap}
+.hstat{background:rgba(255,255,255,.16);border-radius:13px;padding:8px 14px;min-width:92px;backdrop-filter:blur(4px)}
+.hstat b{display:block;font-size:19px;font-weight:800;line-height:1.1}
+.hstat span{font-size:11px;opacity:.9;text-transform:uppercase;letter-spacing:.4px}
+
+/* LAYOUT */
+.grid{display:grid;grid-template-columns:360px 1fr;gap:18px;margin-top:18px;align-items:start}
+@media(max-width:920px){.grid{grid-template-columns:1fr}}
+.panel{background:var(--card);border-radius:var(--r);box-shadow:var(--shadow-sm);border:1px solid var(--line)}
+.panel-h{padding:15px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}
+.panel-h h2{margin:0;font-size:16px;font-weight:800}
+.panel-h .hint{font-size:11.5px;color:var(--muted)}
+.panel-b{padding:16px 18px}
+
+/* FORM */
+.field{margin-bottom:15px}
+.field>label{display:block;font-size:12.5px;font-weight:700;color:#374151;margin-bottom:6px;text-transform:uppercase;letter-spacing:.3px}
+.field .sublbl{font-weight:500;color:var(--muted);text-transform:none;letter-spacing:0}
+input[type=text],input[type=number],select{width:100%;padding:10px 12px;border:1.5px solid var(--line);border-radius:11px;font-size:14px;color:var(--ink);background:#fff;font-family:inherit}
+input:focus,select:focus{outline:none;border-color:var(--pink);box-shadow:0 0 0 3px rgba(253,38,122,.12)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stepper{display:flex;align-items:center;gap:0;border:1.5px solid var(--line);border-radius:11px;overflow:hidden;width:100%}
+.stepper button{flex:0 0 40px;height:40px;border:none;background:#f7f7fb;font-size:20px;font-weight:700;color:var(--pink);cursor:pointer}
+.stepper button:hover{background:#fdeef4}
+.stepper input{border:none;text-align:center;flex:1;border-radius:0;font-weight:700}
+.stepper input:focus{box-shadow:none}
+.range-wrap{display:flex;align-items:center;gap:10px}
+.range-wrap input[type=range]{flex:1;accent-color:var(--pink)}
+.range-val{font-size:13px;font-weight:700;min-width:96px;text-align:right;color:var(--ink)}
+.chips{display:flex;flex-wrap:wrap;gap:7px;max-height:168px;overflow:auto;padding:2px}
+.chip{font-size:12.5px;padding:6px 11px;border:1.5px solid var(--line);border-radius:999px;background:#fff;cursor:pointer;user-select:none;white-space:nowrap;transition:.12s}
+.chip:hover{border-color:var(--pink)}
+.chip.on{background:var(--grad);color:#fff;border-color:transparent;font-weight:700}
+.chip .ct{opacity:.6;font-size:11px;margin-left:3px}
+.chip.on .ct{opacity:.85}
+.toggle{display:flex;align-items:center;gap:9px;font-size:13px;color:#374151;cursor:pointer;margin-bottom:9px}
+.toggle input{width:18px;height:18px;accent-color:var(--pink);cursor:pointer}
+.btns{display:flex;gap:10px;margin-top:6px}
+.btn{flex:1;padding:13px;border:none;border-radius:13px;font-size:15px;font-weight:800;cursor:pointer;font-family:inherit;transition:.15s}
+.btn-primary{background:var(--grad);color:#fff;box-shadow:0 6px 16px rgba(253,38,122,.32)}
+.btn-primary:hover{filter:brightness(1.05);transform:translateY(-1px)}
+.btn-ghost{flex:0 0 auto;background:#f4f5f9;color:var(--muted);padding:13px 16px}
+.btn-ghost:hover{background:#eceef4}
+details.adv{margin-top:6px;border-top:1px dashed var(--line);padding-top:10px}
+details.adv summary{font-size:12.5px;font-weight:700;color:var(--muted);cursor:pointer;list-style:none}
+details.adv summary::-webkit-details-marker{display:none}
+details.adv summary::before{content:"⚙ ";}
+
+/* RESULTS */
+.tabs{display:flex;gap:6px;padding:10px 14px 0}
+.tab{padding:9px 16px;border:none;background:transparent;font-size:14px;font-weight:700;color:var(--muted);cursor:pointer;border-radius:11px 11px 0 0;font-family:inherit}
+.tab.on{color:var(--pink);background:#fff;box-shadow:0 -2px 0 var(--pink) inset}
+.tab .b{background:var(--pink);color:#fff;border-radius:999px;font-size:11px;padding:1px 7px;margin-left:5px}
+.tabwrap{border-top:1px solid var(--line)}
+.view{display:none;padding:18px}
+.view.on{display:block}
+.empty{text-align:center;color:var(--muted);padding:60px 20px}
+.empty .big{font-size:46px;margin-bottom:8px}
+
+/* CARD STACK (TINDER) */
+.stagewrap{display:flex;flex-direction:column;align-items:center}
+.counter{font-size:13px;color:var(--muted);margin-bottom:10px;font-weight:600}
+.stage{position:relative;width:100%;max-width:380px;height:540px;margin:0 auto}
+.swipe{position:absolute;inset:0;background:var(--card);border-radius:24px;box-shadow:var(--shadow);overflow:hidden;border:1px solid var(--line);
+  display:flex;flex-direction:column;will-change:transform;touch-action:none}
+.swipe .hero{height:188px;position:relative;background:var(--grad-soft);color:#fff;padding:16px;display:flex;flex-direction:column;justify-content:space-between;flex:0 0 auto}
+.swipe .hero .ico{font-size:54px;opacity:.9;position:absolute;right:16px;top:12px}
+.swipe .hero .tag{display:inline-block;background:rgba(0,0,0,.22);padding:4px 10px;border-radius:999px;font-size:12px;font-weight:700;align-self:flex-start}
+.swipe .hero .ref{font-size:12px;opacity:.9;margin-top:auto}
+.swipe .hero .price{font-size:27px;font-weight:800;line-height:1.1}
+.swipe .hero .pricenote{font-size:11px;opacity:.85}
+.scorebadge{position:absolute;top:14px;right:14px;width:62px;height:62px;border-radius:50%;background:#fff;color:var(--ink);
+  display:grid;place-items:center;box-shadow:var(--shadow-sm);border:3px solid var(--green);z-index:3}
+.scorebadge b{font-size:19px;font-weight:800;line-height:1}
+.scorebadge span{font-size:8.5px;text-transform:uppercase;letter-spacing:.4px;color:var(--muted)}
+.swipe .body{padding:14px 16px;overflow:auto;flex:1}
+.swipe .loc{font-size:16px;font-weight:800;margin-bottom:2px}
+.swipe .addr{font-size:12.5px;color:var(--muted);margin-bottom:12px}
+.specs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
+.spec{background:#f7f7fb;border-radius:11px;padding:9px 4px;text-align:center}
+.spec b{display:block;font-size:17px;font-weight:800}
+.spec span{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.3px}
+.breakdown{border-top:1px solid var(--line);padding-top:11px}
+.breakdown .bt{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.3px;margin-bottom:8px}
+.brow{display:flex;align-items:center;gap:8px;margin-bottom:7px;font-size:12.5px}
+.brow .nm{width:86px;flex:0 0 auto;color:#374151}
+.brow .bar{flex:1;height:7px;background:#eceef4;border-radius:999px;overflow:hidden}
+.brow .bar i{display:block;height:100%;border-radius:999px;background:var(--grad)}
+.brow .vl{width:62px;text-align:right;flex:0 0 auto;font-weight:600}
+.brow .mk{width:16px;flex:0 0 auto;text-align:center}
+.cap{font-size:11.5px;color:var(--muted);margin-top:10px;border-top:1px solid var(--line);padding-top:9px}
+.choices{display:flex;justify-content:center;gap:18px;margin-top:16px}
+.cbtn{width:62px;height:62px;border-radius:50%;border:none;background:#fff;box-shadow:var(--shadow);font-size:26px;cursor:pointer;transition:.15s;display:grid;place-items:center}
+.cbtn:hover{transform:scale(1.1)}
+.cbtn.no{color:var(--red);border:2px solid #ffe1e1}
+.cbtn.info{width:50px;height:50px;font-size:20px;color:var(--blue);border:2px solid #e1ecff;align-self:center}
+.cbtn.yes{color:var(--green);border:2px solid #d8f5e3}
+.stamp{position:absolute;top:34px;font-size:30px;font-weight:900;letter-spacing:2px;padding:6px 14px;border-radius:12px;border:4px solid;opacity:0;transform:rotate(-18deg);z-index:4;pointer-events:none}
+.stamp.like{left:20px;color:var(--green);border-color:var(--green)}
+.stamp.nope{right:20px;color:var(--red);border-color:var(--red)}
+
+/* RANKING TABLE */
+.rk-controls{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;gap:10px;flex-wrap:wrap}
+.rk-controls .lbl{font-size:13px;color:var(--muted)}
+table.rk{width:100%;border-collapse:collapse;font-size:13px}
+table.rk th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.3px;color:var(--muted);padding:8px 10px;border-bottom:2px solid var(--line);cursor:pointer;white-space:nowrap}
+table.rk th:hover{color:var(--pink)}
+table.rk td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:middle}
+table.rk tr:hover td{background:#fafbfd}
+.scorecell{display:flex;align-items:center;gap:8px;min-width:120px}
+.scorebar{flex:1;height:8px;background:#eceef4;border-radius:999px;overflow:hidden;min-width:54px}
+.scorebar i{display:block;height:100%;background:var(--grad);border-radius:999px}
+.scorecell b{width:34px;text-align:right;font-weight:800}
+.miniref{font-weight:700}
+.minisub{font-size:11px;color:var(--muted)}
+.pill{display:inline-block;font-size:10.5px;padding:2px 8px;border-radius:999px;font-weight:700}
+.pill.perfeito{background:#dcfce7;color:#15803d}
+.pill.alto{background:#fef3c7;color:#b45309}
+.pill.medio{background:#e0e7ff;color:#4338ca}
+.pill.baixo{background:#f3f4f6;color:#6b7280}
+.heart{cursor:pointer;font-size:18px;border:none;background:none;filter:grayscale(1);opacity:.5}
+.heart.on{filter:none;opacity:1}
+.tnum{font-variant-numeric:tabular-nums}
+
+/* FAVORITOS */
+.fav-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;gap:10px;flex-wrap:wrap}
+.fav-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(248px,1fr));gap:14px}
+.favcard{border:1px solid var(--line);border-radius:15px;padding:14px;background:#fff;box-shadow:var(--shadow-sm);position:relative}
+.favcard .x{position:absolute;top:10px;right:12px;border:none;background:none;font-size:16px;color:var(--muted);cursor:pointer}
+.favcard .ft{font-size:15px;font-weight:800}
+.favcard .fs{font-size:12px;color:var(--muted);margin-bottom:8px}
+.favcard .fp{font-size:18px;font-weight:800;color:var(--pink)}
+.favcard .fspecs{font-size:12px;color:#374151;margin-top:6px}
+.fscore{position:absolute;top:10px;left:12px;font-size:12px;font-weight:800;background:#f7f7fb;border-radius:8px;padding:2px 8px}
+
+/* HISTORICO DE BUSCAS */
+.hist-sec{margin-top:26px;border-top:2px dashed var(--line);padding-top:18px}
+.hist-title{margin:0;font-size:15px;font-weight:800;display:flex;align-items:center;gap:8px}
+.hist-title .b{background:var(--pink);color:#fff;border-radius:999px;font-size:11px;padding:1px 8px}
+.histcard{border:1px solid var(--line);border-radius:14px;background:#fff;box-shadow:var(--shadow-sm);margin-bottom:11px;overflow:hidden}
+.histcard .hh{display:flex;align-items:center;gap:11px;padding:12px 14px;cursor:pointer;user-select:none}
+.histcard .hh:hover{background:#fafbfd}
+.hchev{font-size:11px;color:var(--muted);flex:0 0 auto;width:12px}
+.hmeta{flex:1;min-width:0}
+.hmeta .hcli{font-weight:800;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hmeta .hsum{font-size:11.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hbadge{background:var(--grad);color:#fff;border-radius:999px;font-size:11.5px;font-weight:800;padding:3px 10px;white-space:nowrap;flex:0 0 auto}
+.htime{font-size:11px;color:var(--muted);white-space:nowrap;flex:0 0 auto}
+.hacts{display:flex;gap:4px;flex:0 0 auto}
+.hacts button{border:none;background:#f4f5f9;border-radius:8px;width:30px;height:30px;cursor:pointer;font-size:14px;color:#374151;line-height:1}
+.hacts button:hover{background:#fdeef4;color:var(--pink)}
+.hbody{display:none;padding:6px 14px 16px;border-top:1px solid var(--line);background:#fcfcfe}
+.histcard.open .hbody{display:block}
+@media(max-width:560px){.htime{display:none}.hmeta .hsum{white-space:normal}}
+
+/* TOAST */
+#toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;padding:12px 20px;border-radius:12px;font-size:13.5px;font-weight:600;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:.25s;z-index:9999;max-width:90%;text-align:center}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* misc */
+.legend{font-size:11.5px;color:var(--muted);margin-top:14px;padding:12px 14px;background:#fbfbfe;border:1px dashed var(--line);border-radius:12px}
+.legend b{color:#374151}
+.note{font-size:12px;color:var(--amber);margin-top:8px;display:flex;gap:6px;align-items:flex-start}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:22px 10px 8px}
+.foot-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:10px}
+.linkbtn{background:#fff;border:1px solid var(--line);border-radius:10px;padding:9px 14px;font-size:13px;font-weight:700;color:#374151;cursor:pointer}
+.linkbtn:hover{border-color:var(--pink);color:var(--pink)}
+@media print{.no-print{display:none!important}body{background:#fff}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="brand">
+      <div class="flame">🔥</div>
+      <div>
+        <h1>TINDER IMOB</h1>
+        <div class="sub">Match entre a demanda do cliente e a carteira de captações · WB Negócios Imobiliários</div>
+      </div>
+    </div>
+    <div class="hstats" id="hstats"></div>
+  </header>
+
+  <div class="grid">
+
+    <!-- ============ FORM ============ -->
+    <section class="panel no-print">
+      <div class="panel-h"><h2>📋 Demanda do cliente</h2><span class="hint">o que ele procura</span></div>
+      <div class="panel-b">
+
+        <div class="field">
+          <label>Cliente <span class="sublbl">(opcional)</span></label>
+          <input type="text" id="cliente" placeholder="Ex.: João &amp; Maria">
+        </div>
+
+        <div class="row2">
+          <div class="field" style="margin-bottom:12px">
+            <label>Finalidade</label>
+            <select id="finalidade"><option value="">Todas</option></select>
+          </div>
+          <div class="field" style="margin-bottom:12px">
+            <label>Orçamento máx.</label>
+            <input type="number" id="orcamento" placeholder="R$" step="50000">
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Tipo de imóvel <span class="sublbl">(opcional · clique p/ selecionar)</span></label>
+          <div class="chips" id="tipos"></div>
+        </div>
+
+        <div class="field">
+          <label>Área mínima <span class="sublbl">(m²)</span></label>
+          <div class="range-wrap">
+            <input type="range" id="areaR" min="0" max="600" step="10" value="0">
+            <span class="range-val" id="areaV">Indiferente</span>
+          </div>
+        </div>
+
+        <div class="row2">
+          <div class="field">
+            <label>Dormitórios <span class="sublbl">(mín)</span></label>
+            <div class="stepper"><button data-step="dorm" data-d="-1">−</button><input type="number" id="dorm" value="0" min="0" readonly><button data-step="dorm" data-d="1">+</button></div>
+          </div>
+          <div class="field">
+            <label>Suítes <span class="sublbl">(mín)</span></label>
+            <div class="stepper"><button data-step="suites" data-d="-1">−</button><input type="number" id="suites" value="0" min="0" readonly><button data-step="suites" data-d="1">+</button></div>
+          </div>
+        </div>
+
+        <div class="row2">
+          <div class="field">
+            <label>Vagas <span class="sublbl">(mín)</span></label>
+            <div class="stepper"><button data-step="vagas" data-d="-1">−</button><input type="number" id="vagas" value="0" min="0" readonly><button data-step="vagas" data-d="1">+</button></div>
+          </div>
+          <div class="field">
+            <label>Orçamento mín. <span class="sublbl">(opc.)</span></label>
+            <input type="number" id="orcamentoMin" placeholder="R$" step="50000">
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Bairro(s) desejado(s) <span class="sublbl">(clique p/ selecionar)</span></label>
+          <div class="chips" id="bairros"></div>
+        </div>
+
+        <details class="adv">
+          <summary>Filtros rígidos (opcional)</summary>
+          <div style="margin-top:10px">
+            <label class="toggle"><input type="checkbox" id="hardOrc"> Somente dentro do orçamento</label>
+            <label class="toggle"><input type="checkbox" id="hardBairro"> Somente os bairros selecionados</label>
+            <label class="toggle"><input type="checkbox" id="hardTipo"> Somente os tipos selecionados</label>
+            <label class="toggle"><input type="checkbox" id="hardSpecs"> Exigir dorm/suítes/vagas/área no mínimo</label>
+          </div>
+        </details>
+
+        <div class="btns" style="margin-top:14px">
+          <button class="btn btn-primary" id="buscar">🔥 Encontrar matches</button>
+          <button class="btn btn-ghost" id="limpar">Limpar</button>
+        </div>
+
+        <div class="legend">
+          <b>Como pontuamos (score inteligente):</b> orçamento 30 · bairro 20 · dormitórios 20 · área 15 · suítes 8 · vagas 7.
+          Área, dormitórios, suítes e vagas valem como <b>mínimos</b>; valor como <b>teto</b>; bairro como <b>preferência</b> (região vizinha pontua parcial). Imóveis que quase batem aparecem ranqueados mais abaixo.
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ RESULTS ============ -->
+    <section class="panel">
+      <div class="tabs no-print">
+        <button class="tab on" data-view="cards">❤️ Cards</button>
+        <button class="tab" data-view="ranking">📊 Ranking</button>
+        <button class="tab" data-view="favoritos">⭐ Favoritos <span class="b" id="favCount">0</span></button>
+      </div>
+      <div class="tabwrap">
+
+        <!-- CARDS -->
+        <div class="view on" id="view-cards">
+          <div id="cards-empty" class="empty">
+            <div class="big">🏠</div>
+            <p><b>Cadastre a demanda</b> e clique em <b>Encontrar matches</b> para começar a deslizar pelos imóveis.</p>
+          </div>
+          <div class="stagewrap" id="stagewrap" style="display:none">
+            <div class="counter" id="counter"></div>
+            <div class="stage" id="stage"></div>
+            <div class="choices">
+              <button class="cbtn no"  id="btnNo"   title="Descartar (←)">✕</button>
+              <button class="cbtn info" id="btnBack" title="Voltar último">↺</button>
+              <button class="cbtn yes" id="btnYes"  title="Favoritar (→)">❤</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- RANKING -->
+        <div class="view" id="view-ranking">
+          <div class="rk-controls">
+            <span class="lbl" id="rk-count">—</span>
+            <span class="lbl">Clique nos cabeçalhos para ordenar</span>
+          </div>
+          <div style="overflow:auto">
+            <table class="rk" id="rk-table">
+              <thead><tr>
+                <th data-sort="score">Match</th>
+                <th data-sort="id">Ref.</th>
+                <th data-sort="tipo">Tipo / Bairro</th>
+                <th data-sort="valor">Valor</th>
+                <th data-sort="area">Área</th>
+                <th data-sort="dorm">Dorm</th>
+                <th data-sort="suites">Suít</th>
+                <th data-sort="vagas">Vaga</th>
+                <th></th>
+              </tr></thead>
+              <tbody id="rk-body"></tbody>
+            </table>
+          </div>
+          <div id="rk-empty" class="empty"><div class="big">📊</div><p>Sem resultados ainda. Faça uma busca.</p></div>
+        </div>
+
+        <!-- FAVORITOS -->
+        <div class="view" id="view-favoritos">
+          <div class="fav-head">
+            <div><b id="fav-title">Favoritos da busca atual</b><div class="minisub" id="fav-sub"></div></div>
+            <div class="no-print">
+              <button class="linkbtn" id="exportCsv">⬇ CSV</button>
+              <button class="linkbtn" id="printFav">🖨 Imprimir</button>
+              <button class="linkbtn" id="archiveFav">📚 Arquivar busca</button>
+              <button class="linkbtn" id="clearFav">🗑 Descartar</button>
+            </div>
+          </div>
+          <div id="fav-empty" class="empty"><div class="big">⭐</div><p>Os imóveis que você favoritar (❤) aparecem aqui — sua <b>shortlist</b>. Ao <b>limpar os filtros</b> ou clicar em <b>📚 Arquivar busca</b>, esta lista vira um card no <b>histórico</b> logo abaixo.</p></div>
+          <div class="fav-grid" id="fav-grid"></div>
+
+          <div class="hist-sec" id="hist-sec" style="display:none">
+            <h3 class="hist-title">📚 Histórico de buscas <span class="b" id="histCount">0</span></h3>
+            <div class="minisub" style="margin:4px 0 14px">Cada busca arquivada vira um card. Clique para abrir os imóveis salvos · ↩ restaurar · ⬇ exportar · 🗑 excluir.</div>
+            <div id="hist-list"></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="foot-actions no-print">
+      <button class="linkbtn" id="reload">↻ Recomeçar busca</button>
+    </div>
+    <div>Carteira: <b id="foot-total">—</b> imóveis ativos · snapshot de <b id="foot-date">—</b> · dados extraídos da Kenlo Imob.
+    Os valores marcados <b>"a confirmar"</b> têm preço de venda inconsistente no cadastro — revise na Kenlo.</div>
+  </footer>
+
+</div>
+
+<script>
+const IMOVEIS = [
+ {
+  "id": "AP0094",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua São Paulo, nº 2050",
+  "cond": "Veleiros",
+  "bairro": "Praia da Costa",
+  "bairroRaw": "Praia da Costa",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 1650000,
+  "dorm": 3,
+  "suites": 1,
+  "vagas": 2,
+  "area": 101,
+  "rcond": 825,
+  "iptu": 0,
+  "fotos": 37,
+  "captador": "THIAGO MARCHESI"
+ },
+ {
+  "id": "AP0219",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Hugo Musso, nº 1754",
+  "cond": "Ed Plaza",
+  "bairro": "Praia de Itapoã",
+  "bairroRaw": "Praia de Itapoã",
+  "regiao": "Itapoã",
+  "cidade": "Vila Velha",
+  "valor": 1300000,
+  "dorm": 4,
+  "suites": 1,
+  "vagas": 2,
+  "area": 180,
+  "rcond": 701,
+  "iptu": 0,
+  "fotos": 20,
+  "captador": "THIAGO MARCHESI"
+ },
+ {
+  "id": "AP0218",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Itaboraí, nº 326",
+  "cond": "Ed Ilhas do Pacifico",
+  "bairro": "Praia das Gaivotas",
+  "bairroRaw": "Praia das Gaivotas",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 895000,
+  "dorm": 3,
+  "suites": 1,
+  "vagas": 1,
+  "area": 90,
+  "rcond": 600,
+  "iptu": 1200,
+  "fotos": 12,
+  "captador": "CLAUDIO LUIS BARBOSA"
+ },
+ {
+  "id": "AP0224",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Afonso Pena, nº 536",
+  "cond": "Gurian Lira",
+  "bairro": "Praia da Costa",
+  "bairroRaw": "Praia da Costa",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 950000,
+  "dorm": 2,
+  "suites": 1,
+  "vagas": 2,
+  "area": 60,
+  "rcond": 711,
+  "iptu": 1670,
+  "fotos": 14,
+  "captador": "Marcelo Siqueira Albano da Costa"
+ },
+ {
+  "id": "AP0211",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Estudante José Júlio de Souza, nº 3600",
+  "cond": "Condomínio American Towers",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 1399000,
+  "dorm": 3,
+  "suites": 1,
+  "vagas": 2,
+  "area": 130,
+  "rcond": 800,
+  "iptu": 0,
+  "fotos": 18,
+  "captador": "THIAGO MARCHESI"
+ },
+ {
+  "id": "AP0225",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Travessa São Paulo, nº 1500",
+  "cond": "Edifício Anandreia",
+  "bairro": "Praia da Costa",
+  "bairroRaw": "Praia da Costa",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 695000,
+  "dorm": 3,
+  "suites": 0,
+  "vagas": 1,
+  "area": 102,
+  "rcond": 490,
+  "iptu": 0,
+  "fotos": 15,
+  "captador": "Matheus Zamborlini"
+ },
+ {
+  "id": "CA0019",
+  "tipo": "Casa",
+  "finalidade": "Residencial",
+  "endereco": "Rua Nilton Koehler, nº 183",
+  "cond": "Residência Em Domingos Martins",
+  "bairro": "Centro",
+  "bairroRaw": "Centro",
+  "regiao": "Centro",
+  "cidade": "Domingos Martins",
+  "valor": 2600000,
+  "dorm": 4,
+  "suites": 4,
+  "vagas": 2,
+  "area": 300,
+  "rcond": 0,
+  "iptu": 0,
+  "fotos": 12,
+  "captador": "AMANDA DOMINGOS"
+ },
+ {
+  "id": "SA0005",
+  "tipo": "Sala",
+  "finalidade": "Comercial",
+  "endereco": "Rua Maranhão, nº 575",
+  "cond": "Centro Empresarial Praia da Costa Torre Sul",
+  "bairro": "Praia da Costa",
+  "bairroRaw": "Praia da Costa",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 550000,
+  "dorm": 0,
+  "suites": 0,
+  "vagas": 0,
+  "area": 45,
+  "rcond": 500,
+  "iptu": 0,
+  "fotos": 4,
+  "captador": "Marcelo Siqueira Albano da Costa"
+ },
+ {
+  "id": "CA0022",
+  "tipo": "Casa",
+  "finalidade": "Comercial",
+  "endereco": "Rua Castelo Branco, nº 1311",
+  "cond": "",
+  "bairro": "Praia da Costa",
+  "bairroRaw": "Praia da Costa",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 1680000,
+  "dorm": 4,
+  "suites": 1,
+  "vagas": 5,
+  "area": 250,
+  "rcond": 0,
+  "iptu": 0,
+  "fotos": 5,
+  "captador": "Marcelo Siqueira Albano da Costa"
+ },
+ {
+  "id": "AP0220",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Itabaiana, nº 133",
+  "cond": "Costa de Itaparica",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 820000,
+  "dorm": 2,
+  "suites": 1,
+  "vagas": 1,
+  "area": 68,
+  "rcond": 500,
+  "iptu": 0,
+  "fotos": 32,
+  "captador": "Paulo Cesar Barbosa Azevedo"
+ },
+ {
+  "id": "AP0221",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Itabaiana, nº 133",
+  "cond": "Costa de Itaparica",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 800,
+  "dorm": 2,
+  "suites": 1,
+  "vagas": 1,
+  "area": 68,
+  "rcond": 500,
+  "iptu": 0,
+  "fotos": 14,
+  "captador": "Paulo Cesar Barbosa Azevedo"
+ },
+ {
+  "id": "AP0222",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Itabaiana, nº 775",
+  "cond": "Condomínio Mar Mediterrâneo",
+  "bairro": "Praia das Gaivotas",
+  "bairroRaw": "Praia das Gaivotas",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 640000,
+  "dorm": 2,
+  "suites": 1,
+  "vagas": 1,
+  "area": 65,
+  "rcond": 500,
+  "iptu": 0,
+  "fotos": 12,
+  "captador": "Paulo Cesar Barbosa Azevedo"
+ },
+ {
+  "id": "AP0214",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Estudante José Júlio de Souza, nº 1850",
+  "cond": "Edifício Mar Mediterraneo",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 2350000,
+  "dorm": 4,
+  "suites": 2,
+  "vagas": 3,
+  "area": 175,
+  "rcond": 1679,
+  "iptu": 0,
+  "fotos": 16,
+  "captador": "Thalyta Gonçalves Mafalda Coutinho"
+ },
+ {
+  "id": "AP0223",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Conjunto Coqueiral De Itaparica, nº 2200",
+  "cond": "Condominio Vila Mar 6 Etapa",
+  "bairro": "Coqueiral de Itaparica",
+  "bairroRaw": "Coqueiral de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 452000,
+  "dorm": 2,
+  "suites": 0,
+  "vagas": 1,
+  "area": 65,
+  "rcond": 350,
+  "iptu": 0,
+  "fotos": 18,
+  "captador": "Paulo Cesar Barbosa Azevedo"
+ },
+ {
+  "id": "AP0217",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Estudante José Júlio de Souza, nº 3300",
+  "cond": "Ilhas Gregas",
+  "bairro": "Itaparica",
+  "bairroRaw": "Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 4000000,
+  "dorm": 3,
+  "suites": 2,
+  "vagas": 3,
+  "area": 250,
+  "rcond": 2600,
+  "iptu": 0,
+  "fotos": 11,
+  "captador": "Thayane Caroline Nogueira Miranda"
+ },
+ {
+  "id": "AP0122",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Saturnino Rangel Mauro, nº 1552",
+  "cond": "Bugatti",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 770000,
+  "dorm": 2,
+  "suites": 1,
+  "vagas": 1,
+  "area": 65,
+  "rcond": 480,
+  "iptu": 0,
+  "fotos": 17,
+  "captador": "Gladys Muniz"
+ },
+ {
+  "id": "AP0172",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Ibitirama, nº 250",
+  "cond": "Celebration",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 849000,
+  "dorm": 2,
+  "suites": 1,
+  "vagas": 2,
+  "area": 67,
+  "rcond": 0,
+  "iptu": 1188,
+  "fotos": 32,
+  "captador": "Bruno Severnini Penna Rocha"
+ },
+ {
+  "id": "AP0215",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Luiz Fernandes Reis, nº 233",
+  "cond": "Residencial Atlântico",
+  "bairro": "Praia da Costa",
+  "bairroRaw": "Praia da Costa",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 1050000,
+  "dorm": 2,
+  "suites": 1,
+  "vagas": 2,
+  "area": 81,
+  "rcond": 950,
+  "iptu": 0,
+  "fotos": 22,
+  "captador": "Livia Zamborlini Simoes Bassini"
+ },
+ {
+  "id": "AP0213",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Pernambuco, nº 120",
+  "cond": "Veranno",
+  "bairro": "Praia da Costa",
+  "bairroRaw": "Praia da Costa",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 1100000,
+  "dorm": 3,
+  "suites": 1,
+  "vagas": 2,
+  "area": 120,
+  "rcond": 0,
+  "iptu": 0,
+  "fotos": 46,
+  "captador": "José Tarcisio dos Santos Junior"
+ },
+ {
+  "id": "AP0196",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rodovia do Sol, nº 655",
+  "cond": "Residencial Milano",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 895000,
+  "dorm": 2,
+  "suites": 1,
+  "vagas": 2,
+  "area": 63,
+  "rcond": 540,
+  "iptu": 0,
+  "fotos": 16,
+  "captador": "Paulo Cesar Barbosa Azevedo"
+ },
+ {
+  "id": "AP0209",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Pernambuco, nº 1147",
+  "cond": "Major Fraga",
+  "bairro": "Praia da Costa",
+  "bairroRaw": "Praia da Costa",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 970000,
+  "dorm": 2,
+  "suites": 1,
+  "vagas": 1,
+  "area": 70,
+  "rcond": 700,
+  "iptu": 0,
+  "fotos": 32,
+  "captador": "José Tarcisio dos Santos Junior"
+ },
+ {
+  "id": "AP0210",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Luiz Manoel Vellozo, nº 130",
+  "cond": "Edifício Marbella",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 465000,
+  "dorm": 2,
+  "suites": 0,
+  "vagas": 1,
+  "area": 50,
+  "rcond": 400,
+  "iptu": 800,
+  "fotos": 9,
+  "captador": "Marcelo Siqueira Albano da Costa"
+ },
+ {
+  "id": "CA0020",
+  "tipo": "Casa",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Mara Regina Paludo, nº 0",
+  "cond": "Condomínio Alphaville Jacuhy",
+  "bairro": "Alphaville Jacuhy",
+  "bairroRaw": "Alphaville Jacuhy",
+  "regiao": "Alphaville Jacuhy",
+  "cidade": "Serra",
+  "valor": 3980000,
+  "dorm": 4,
+  "suites": 3,
+  "vagas": 2,
+  "area": 400,
+  "rcond": 1100,
+  "iptu": 0,
+  "fotos": 6,
+  "captador": "Thalyta Gonçalves Mafalda Coutinho"
+ },
+ {
+  "id": "AP0193",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Hugo Musso 1554, nº 1553",
+  "cond": "Amazonia Place",
+  "bairro": "Itapuã",
+  "bairroRaw": "Itapuã",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 1250000,
+  "dorm": 3,
+  "suites": 1,
+  "vagas": 2,
+  "area": 150,
+  "rcond": 900,
+  "iptu": 0,
+  "fotos": 14,
+  "captador": "THIAGO MARCHESI"
+ },
+ {
+  "id": "SA0004",
+  "tipo": "Sala",
+  "finalidade": "Corporativa",
+  "endereco": "Rodovia do Sol, nº 2070",
+  "cond": "Royal Blue Corporate",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 2200000,
+  "dorm": 0,
+  "suites": 0,
+  "vagas": 5,
+  "area": 178,
+  "rcond": 0,
+  "iptu": 0,
+  "fotos": 19,
+  "captador": "José Tarcisio dos Santos Junior"
+ },
+ {
+  "id": "AP0212",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Santa Leopoldina, nº 2200",
+  "cond": "6ª Etapa",
+  "bairro": "Coqueiral de Itaparica",
+  "bairroRaw": "Coqueiral de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 369000,
+  "dorm": 2,
+  "suites": 0,
+  "vagas": 1,
+  "area": 47,
+  "rcond": 429,
+  "iptu": 0,
+  "fotos": 6,
+  "captador": "Marcelo Siqueira Albano da Costa"
+ },
+ {
+  "id": "AP0163",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Desembargador Augusto Botelho, nº 514",
+  "cond": "Myrthes Vieira",
+  "bairro": "Praia da Costa",
+  "bairroRaw": "Praia da Costa",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 1400000,
+  "dorm": 3,
+  "suites": 1,
+  "vagas": 2,
+  "area": 90,
+  "rcond": 0,
+  "iptu": 0,
+  "fotos": 23,
+  "captador": "Xeno Palhares"
+ },
+ {
+  "id": "AP0208",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida João Mendes, nº 0",
+  "cond": "Edifício Ilhas de Maui",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 730000,
+  "dorm": 2,
+  "suites": 1,
+  "vagas": 1,
+  "area": 58,
+  "rcond": 400,
+  "iptu": 1300,
+  "fotos": 9,
+  "captador": "AMANDA DOMINGOS"
+ },
+ {
+  "id": "CA0015",
+  "tipo": "Casa",
+  "finalidade": "Residencial",
+  "endereco": "Rua Cândido Portinari, nº 37",
+  "cond": "",
+  "bairro": "Barra do Jucu",
+  "bairroRaw": "Barra do Jucu",
+  "regiao": "Barra do Jucu",
+  "cidade": "Vila Velha",
+  "valor": 800000,
+  "dorm": 4,
+  "suites": 1,
+  "vagas": 0,
+  "area": 414,
+  "rcond": 0,
+  "iptu": 0,
+  "fotos": 15,
+  "captador": "Douglas Santos Gomes"
+ },
+ {
+  "id": "AP0194",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Niterói, nº 65",
+  "cond": "Ile de France",
+  "bairro": "Praia de Itapoã",
+  "bairroRaw": "Praia de Itapoã",
+  "regiao": "Itapoã",
+  "cidade": "Vila Velha",
+  "valor": 1680000,
+  "dorm": 4,
+  "suites": 1,
+  "vagas": 2,
+  "area": 169,
+  "rcond": 1000,
+  "iptu": 2000,
+  "fotos": 9,
+  "captador": ""
+ },
+ {
+  "id": "AP0178",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Goiás, nº 71",
+  "cond": "Edifício Gold Coast",
+  "bairro": "Praia de Itapoã",
+  "bairroRaw": "Praia de Itapoã",
+  "regiao": "Itapoã",
+  "cidade": "Vila Velha",
+  "valor": 900000,
+  "dorm": 2,
+  "suites": 1,
+  "vagas": 1,
+  "area": 90,
+  "rcond": 690,
+  "iptu": 0,
+  "fotos": 13,
+  "captador": "Thalyta Gonçalves Mafalda Coutinho"
+ },
+ {
+  "id": "CO0006",
+  "tipo": "Cobertura",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Estudante José Júlio de Souza, nº 2850",
+  "cond": "Edifício Burle Marx",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 5565000,
+  "dorm": 5,
+  "suites": 4,
+  "vagas": 3,
+  "area": 540,
+  "rcond": 2711,
+  "iptu": 4055,
+  "fotos": 16,
+  "captador": "Thalyta Gonçalves Mafalda Coutinho"
+ },
+ {
+  "id": "AP0203",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Estudante José Júlio de Souza, nº 3600",
+  "cond": "Condomínio American Towers",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 1450000,
+  "dorm": 3,
+  "suites": 1,
+  "vagas": 2,
+  "area": 126,
+  "rcond": 850,
+  "iptu": 1200,
+  "fotos": 13,
+  "captador": "CLAUDIO LUIS BARBOSA"
+ },
+ {
+  "id": "AP0206",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Itacibá, nº 170",
+  "cond": "Edifício Costa Fortuna",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 709000,
+  "dorm": 2,
+  "suites": 1,
+  "vagas": 1,
+  "area": 71,
+  "rcond": 500,
+  "iptu": 0,
+  "fotos": 14,
+  "captador": "Marcelo Siqueira Albano da Costa"
+ },
+ {
+  "id": "SA0003",
+  "tipo": "Sala",
+  "finalidade": "Comercial",
+  "endereco": "Rua Guanabara, nº 1517",
+  "cond": "Edifício Pegasus",
+  "bairro": "Itapuã",
+  "bairroRaw": "Itapuã",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 330000,
+  "dorm": 0,
+  "suites": 0,
+  "vagas": 0,
+  "area": 30,
+  "rcond": 100,
+  "iptu": 0,
+  "fotos": 4,
+  "captador": "Marcelo Siqueira Albano da Costa"
+ },
+ {
+  "id": "AP0205",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Hugo Musso, nº 2000",
+  "cond": "Royal Beach",
+  "bairro": "Itapuã",
+  "bairroRaw": "Itapuã",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 1600000,
+  "dorm": 3,
+  "suites": 1,
+  "vagas": 4,
+  "area": 163,
+  "rcond": 1600,
+  "iptu": 0,
+  "fotos": 14,
+  "captador": "Livia Zamborlini Simoes Bassini"
+ },
+ {
+  "id": "AP0036",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Antônio Gil Veloso, nº 1270",
+  "cond": "Ocean Blue",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 3500000,
+  "dorm": 4,
+  "suites": 4,
+  "vagas": 3,
+  "area": 330,
+  "rcond": 1800,
+  "iptu": 0,
+  "fotos": 28,
+  "captador": "Daniela Rocha Lima"
+ },
+ {
+  "id": "AP0150",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Estudante José Júlio de Souza, nº 1730",
+  "cond": "Philadelphia",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 2500000,
+  "dorm": 3,
+  "suites": 1,
+  "vagas": 2,
+  "area": 171,
+  "rcond": 1440,
+  "iptu": 0,
+  "fotos": 27,
+  "captador": "Thayane Caroline Nogueira Miranda"
+ },
+ {
+  "id": "AP0202",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Hugo Musso, nº 2000",
+  "cond": "Royal Beach",
+  "bairro": "Itapuã",
+  "bairroRaw": "Itapuã",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 1980000,
+  "dorm": 3,
+  "suites": 1,
+  "vagas": 3,
+  "area": 138,
+  "rcond": 1600,
+  "iptu": 0,
+  "fotos": 28,
+  "captador": "Thayane Caroline Nogueira Miranda"
+ },
+ {
+  "id": "TE0008",
+  "tipo": "Terreno",
+  "finalidade": "Residencial",
+  "endereco": "Rodovia Do Sol, Lt. 0",
+  "cond": "Condomínio Jardins Veneza",
+  "bairro": "Interlagos",
+  "bairroRaw": "Interlagos",
+  "regiao": "Interlagos",
+  "cidade": "Vila Velha",
+  "valor": 750000,
+  "dorm": 0,
+  "suites": 0,
+  "vagas": 0,
+  "area": 617,
+  "rcond": 1000,
+  "iptu": 800,
+  "fotos": 6,
+  "captador": "Marcelo Siqueira Albano da Costa"
+ },
+ {
+  "id": "CA0018",
+  "tipo": "Casa",
+  "finalidade": "Residencial",
+  "endereco": "Rua Vasco Coutinho, nº 0",
+  "cond": "",
+  "bairro": "Centro",
+  "bairroRaw": "Centro",
+  "regiao": "Centro",
+  "cidade": "Vila Velha",
+  "valor": 2500000,
+  "dorm": 5,
+  "suites": 2,
+  "vagas": 2,
+  "area": 369,
+  "rcond": 0,
+  "iptu": 0,
+  "fotos": 3,
+  "captador": "Livia Zamborlini Simoes Bassini"
+ },
+ {
+  "id": "AP0198",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Humberto Pereira, nº 11",
+  "cond": "Fasano",
+  "bairro": "Itaparica",
+  "bairroRaw": "Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 3300000,
+  "dorm": 4,
+  "suites": 1,
+  "vagas": 3,
+  "area": 180,
+  "rcond": 1300,
+  "iptu": 0,
+  "fotos": 27,
+  "captador": "Thayane Caroline Nogueira Miranda"
+ },
+ {
+  "id": "AP0199",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Hugo Musso, nº 254",
+  "cond": "Ed. Maison Augusta",
+  "bairro": "Praia da Costa",
+  "bairroRaw": "Praia da Costa",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 3200000,
+  "dorm": 4,
+  "suites": 4,
+  "vagas": 2,
+  "area": 330,
+  "rcond": 1200,
+  "iptu": 0,
+  "fotos": 30,
+  "captador": "Thalyta Gonçalves Mafalda Coutinho"
+ },
+ {
+  "id": "HO0001",
+  "tipo": "Hotel",
+  "finalidade": "Comercial",
+  "endereco": "Rodovia do Sol, nº 700",
+  "cond": "Tulip In",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 260000,
+  "dorm": 1,
+  "suites": 0,
+  "vagas": 0,
+  "area": 17,
+  "rcond": 0,
+  "iptu": 0,
+  "fotos": 5,
+  "captador": "Paulo Cesar Barbosa Azevedo"
+ },
+ {
+  "id": "AP0201",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Saturnino Rangel Mauro, nº 3226",
+  "cond": "Ilha de Key West",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 730000,
+  "dorm": 2,
+  "suites": 1,
+  "vagas": 1,
+  "area": 54,
+  "rcond": 500,
+  "iptu": 0,
+  "fotos": 15,
+  "captador": "Paulo Cesar Barbosa Azevedo"
+ },
+ {
+  "id": "AP0200",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Antônio Gil Vellozo, nº 3300",
+  "cond": "Pedro Alcântara",
+  "bairro": "Praia da Costa",
+  "bairroRaw": "Praia da Costa",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 4000000,
+  "dorm": 4,
+  "suites": 3,
+  "vagas": 5,
+  "area": 360,
+  "rcond": 0,
+  "iptu": 0,
+  "fotos": 16,
+  "captador": "Bruno Severnini Penna Rocha"
+ },
+ {
+  "id": "CA0016",
+  "tipo": "Casa",
+  "finalidade": "Residencial",
+  "endereco": "Rodovia Do Sol, nº 14",
+  "cond": "Condomínio Jardins Veneza",
+  "bairro": "Interlagos",
+  "bairroRaw": "Interlagos",
+  "regiao": "Interlagos",
+  "cidade": "Vila Velha",
+  "valor": 5500000,
+  "dorm": 8,
+  "suites": 5,
+  "vagas": 4,
+  "area": 756,
+  "rcond": 1000,
+  "iptu": 0,
+  "fotos": 9,
+  "captador": "Marcelo Siqueira Albano da Costa"
+ },
+ {
+  "id": "AP0195",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Romero Botelho, nº 488",
+  "cond": "Edifício Belvedere",
+  "bairro": "Praia da Costa",
+  "bairroRaw": "Praia da Costa",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 780000,
+  "dorm": 2,
+  "suites": 1,
+  "vagas": 1,
+  "area": 61,
+  "rcond": 600,
+  "iptu": 0,
+  "fotos": 23,
+  "captador": "Marcelo Siqueira Albano da Costa"
+ },
+ {
+  "id": "AP0188",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Inácio Higino, nº 600",
+  "cond": "Roberta / Mar Azul 1",
+  "bairro": "Praia da Costa",
+  "bairroRaw": "Praia da Costa",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 439000,
+  "dorm": 2,
+  "suites": 0,
+  "vagas": 1,
+  "area": 62,
+  "rcond": 450,
+  "iptu": 0,
+  "fotos": 21,
+  "captador": "Daniela Rocha Lima"
+ },
+ {
+  "id": "AP0186",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Saturnino Rangel Mauro, nº 680",
+  "cond": "Itaparica Connection Residence",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 769900,
+  "dorm": 2,
+  "suites": 1,
+  "vagas": 1,
+  "area": 63,
+  "rcond": 810,
+  "iptu": 0,
+  "fotos": 14,
+  "captador": "Paulo Cesar Barbosa Azevedo"
+ },
+ {
+  "id": "AP0180",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Odette de Oliveira Lacourt, nº 1059",
+  "cond": "Edificio Madri",
+  "bairro": "Jardim da Penha",
+  "bairroRaw": "Jardim da Penha",
+  "regiao": "Jardim da Penha",
+  "cidade": "Vitória",
+  "valor": 800000,
+  "dorm": 2,
+  "suites": 1,
+  "vagas": 1,
+  "area": 63,
+  "rcond": 600,
+  "iptu": 0,
+  "fotos": 16,
+  "captador": "Thayane Caroline Nogueira Miranda"
+ },
+ {
+  "id": "AP0183",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Joseph Zgaib, nº 95",
+  "cond": "Antônio Carneiro Maia",
+  "bairro": "Praia da Costa",
+  "bairroRaw": "Praia da Costa",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 1350000,
+  "dorm": 4,
+  "suites": 1,
+  "vagas": 2,
+  "area": 102,
+  "rcond": 1000,
+  "iptu": 0,
+  "fotos": 20,
+  "captador": "Daniela Rocha Lima"
+ },
+ {
+  "id": "AP0100",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Saturnino Rangel Mauro, nº 3302",
+  "cond": "Condomínio do Edifício Fellini",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 650000,
+  "dorm": 2,
+  "suites": 1,
+  "vagas": 0,
+  "area": 59,
+  "rcond": 400,
+  "iptu": 0,
+  "fotos": 13,
+  "captador": "Daniele Goulart Martins"
+ },
+ {
+  "id": "FL0001",
+  "tipo": "Flat",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Antônio Gil Veloso, nº 856",
+  "cond": "Quality Suítes",
+  "bairro": "Praia da Costa",
+  "bairroRaw": "Praia da Costa",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 800000,
+  "dorm": 1,
+  "suites": 0,
+  "vagas": 1,
+  "area": 45,
+  "rcond": 0,
+  "iptu": 0,
+  "fotos": 8,
+  "captador": "Marcelo Siqueira Albano da Costa"
+ },
+ {
+  "id": "AP0184",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Joseph Zgaib, nº 950",
+  "cond": "Antônio Carneiro Maia",
+  "bairro": "Praia da Costa",
+  "bairroRaw": "Praia da Costa",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 1350000,
+  "dorm": 4,
+  "suites": 1,
+  "vagas": 2,
+  "area": 102,
+  "rcond": 0,
+  "iptu": 0,
+  "fotos": 16,
+  "captador": "Daniela Rocha Lima"
+ },
+ {
+  "id": "AP0182",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "do Sol, nº 1601",
+  "cond": "City Off Lowton",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 830000,
+  "dorm": 2,
+  "suites": 1,
+  "vagas": 2,
+  "area": 70,
+  "rcond": 925,
+  "iptu": 0,
+  "fotos": 16,
+  "captador": "Daniela Rocha Lima"
+ },
+ {
+  "id": "AP0174",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Hugo Musso 1554, nº 1553",
+  "cond": "Amazonia Place",
+  "bairro": "Itaparica",
+  "bairroRaw": "Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 1280000,
+  "dorm": 3,
+  "suites": 1,
+  "vagas": 2,
+  "area": 146,
+  "rcond": 800,
+  "iptu": 0,
+  "fotos": 30,
+  "captador": "Thayane Caroline Nogueira Miranda"
+ },
+ {
+  "id": "AP0143",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Itaboraí, nº 326",
+  "cond": "",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 895000,
+  "dorm": 3,
+  "suites": 1,
+  "vagas": 1,
+  "area": 90,
+  "rcond": 0,
+  "iptu": 0,
+  "fotos": 23,
+  "captador": "Lucas Martins Wanzeler"
+ },
+ {
+  "id": "CA0011",
+  "tipo": "Casa",
+  "finalidade": "Residencial",
+  "endereco": "Rua Manoel de Abreu, nº 0",
+  "cond": "",
+  "bairro": "Nova Itaparica",
+  "bairroRaw": "Nova Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 850000,
+  "dorm": 3,
+  "suites": 2,
+  "vagas": 1,
+  "area": 113,
+  "rcond": 0,
+  "iptu": 0,
+  "fotos": 18,
+  "captador": "Lucas Martins Wanzeler"
+ },
+ {
+  "id": "AP0139",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Humberto Serrano, nº 1140",
+  "cond": "Edifício Golden Beach",
+  "bairro": "Praia de Itapoã",
+  "bairroRaw": "Itapoa",
+  "regiao": "Itapoã",
+  "cidade": "Vila Velha",
+  "valor": 1280000,
+  "dorm": 3,
+  "suites": 1,
+  "vagas": 2,
+  "area": 110,
+  "rcond": 650,
+  "iptu": 0,
+  "fotos": 29,
+  "captador": "Lucas Martins Wanzeler"
+ },
+ {
+  "id": "CA0012",
+  "tipo": "Casa",
+  "finalidade": "Residencial",
+  "endereco": "Rua dos Flamboyants, nº 14",
+  "cond": "",
+  "bairro": "Morada do Sol",
+  "bairroRaw": "Morada do Sol",
+  "regiao": "Morada do Sol",
+  "cidade": "Vila Velha",
+  "valor": 1270000,
+  "dorm": 3,
+  "suites": 2,
+  "vagas": 4,
+  "area": 135,
+  "rcond": 0,
+  "iptu": 0,
+  "fotos": 15,
+  "captador": "Lucas Martins Wanzeler"
+ },
+ {
+  "id": "AP0158",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Antonio Gil Veloso, nº 1302",
+  "cond": "Edifício Praia Branca",
+  "bairro": "Praia da Costa",
+  "bairroRaw": "Praia da Costa",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 1600000,
+  "dorm": 2,
+  "suites": 1,
+  "vagas": 1,
+  "area": 80,
+  "rcond": 850,
+  "iptu": 0,
+  "fotos": 23,
+  "captador": "Lucas Martins Wanzeler"
+ },
+ {
+  "id": "AP0169",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rodovia do Sol, nº 76",
+  "cond": "Solar Bodevan",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 1150000,
+  "dorm": 3,
+  "suites": 1,
+  "vagas": 2,
+  "area": 80,
+  "rcond": 0,
+  "iptu": 0,
+  "fotos": 22,
+  "captador": "Lucas Martins Wanzeler"
+ },
+ {
+  "id": "AP0175",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida São Paulo, nº 2007",
+  "cond": "Costa Marina",
+  "bairro": "Praia da Costa",
+  "bairroRaw": "Praia da Costa",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 1140000,
+  "dorm": 3,
+  "suites": 1,
+  "vagas": 2,
+  "area": 130,
+  "rcond": 900,
+  "iptu": 0,
+  "fotos": 20,
+  "captador": "Matheus Zamborlini"
+ },
+ {
+  "id": "AP0170",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Desembargador Augusto Botelho, nº 0",
+  "cond": "Edifício Joaquim José dos Santos",
+  "bairro": "Praia da Costa",
+  "bairroRaw": "Praia da Costa",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 1750000,
+  "dorm": 4,
+  "suites": 2,
+  "vagas": 3,
+  "area": 150,
+  "rcond": 800,
+  "iptu": 1800,
+  "fotos": 15,
+  "captador": "Marcelo Siqueira Albano da Costa"
+ },
+ {
+  "id": "AP0162",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida São Paulo, nº 2049",
+  "cond": "Edifício Walter Casagrande",
+  "bairro": "Praia da Costa",
+  "bairroRaw": "Praia da Costa",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 1250000,
+  "dorm": 3,
+  "suites": 1,
+  "vagas": 2,
+  "area": 136,
+  "rcond": 650,
+  "iptu": 0,
+  "fotos": 23,
+  "captador": "THIAGO MARCHESI"
+ },
+ {
+  "id": "AP0166",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Resplendor, nº 133",
+  "cond": "Edíficio Santa Fé",
+  "bairro": "Itapuã",
+  "bairroRaw": "Itapuã",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 945000,
+  "dorm": 2,
+  "suites": 1,
+  "vagas": 2,
+  "area": 86,
+  "rcond": 0,
+  "iptu": 0,
+  "fotos": 20,
+  "captador": "Paulo Cesar Barbosa Azevedo"
+ },
+ {
+  "id": "SA0002",
+  "tipo": "Sala",
+  "finalidade": "Comercial",
+  "endereco": "Avenida Capixaba, nº 27",
+  "cond": "Morales",
+  "bairro": "Divino Espírito Santo",
+  "bairroRaw": "Divino Espírito Santo",
+  "regiao": "Divino Espírito Santo",
+  "cidade": "Vila Velha",
+  "valor": 160000,
+  "dorm": 0,
+  "suites": 0,
+  "vagas": 1,
+  "area": 35,
+  "rcond": 400,
+  "iptu": 0,
+  "fotos": 7,
+  "captador": "Daniela Rocha Lima"
+ },
+ {
+  "id": "AP0167",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rodovia do Sol, nº 785",
+  "cond": "Condomínio Residencial Águas Claras",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 900000,
+  "dorm": 2,
+  "suites": 1,
+  "vagas": 1,
+  "area": 75,
+  "rcond": 600,
+  "iptu": 0,
+  "fotos": 13,
+  "captador": "Paulo Cesar Barbosa Azevedo"
+ },
+ {
+  "id": "AP0165",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Doutor Aniceto Frizzera Filho, nº 75",
+  "cond": "Ed. Monet",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 1300000,
+  "dorm": 3,
+  "suites": 1,
+  "vagas": 0,
+  "area": 149,
+  "rcond": 0,
+  "iptu": 0,
+  "fotos": 14,
+  "captador": "Douglas Santos Gomes"
+ },
+ {
+  "id": "AP0164",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Saturnino Rangel Mauro, nº 1955",
+  "cond": "Edificio Ilha Das Antilhas",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 900000,
+  "dorm": 3,
+  "suites": 1,
+  "vagas": 2,
+  "area": 75,
+  "rcond": 515,
+  "iptu": 0,
+  "fotos": 22,
+  "captador": "Douglas Santos Gomes"
+ },
+ {
+  "id": "CA0014",
+  "tipo": "Casa",
+  "finalidade": "Residencial",
+  "endereco": "Paulo Cezar Vinha, nº 4",
+  "cond": "Condomínio Riviera Park Residence",
+  "bairro": "Santa Paula I",
+  "bairroRaw": "Santa Paula I",
+  "regiao": "Santa Paula I",
+  "cidade": "Vila Velha",
+  "valor": 5000000,
+  "dorm": 4,
+  "suites": 4,
+  "vagas": 2,
+  "area": 575,
+  "rcond": 1200,
+  "iptu": 0,
+  "fotos": 1,
+  "captador": "GUSTAVO NEIVA TEIXEIRA"
+ },
+ {
+  "id": "AP0157",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Antônio Gil Veloso, nº 2350",
+  "cond": "Edifício Adelson Bourguignon",
+  "bairro": "Praia de Itapoã",
+  "bairroRaw": "Praia de Itapoã",
+  "regiao": "Itapoã",
+  "cidade": "Vila Velha",
+  "valor": 990000,
+  "dorm": 2,
+  "suites": 1,
+  "vagas": 1,
+  "area": 100,
+  "rcond": 500,
+  "iptu": 150,
+  "fotos": 14,
+  "captador": "Marcelo Siqueira Albano da Costa"
+ },
+ {
+  "id": "AP0161",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Castelo Branco, nº 179",
+  "cond": "Condomínio Costamares",
+  "bairro": "Praia da Costa",
+  "bairroRaw": "Praia da Costa",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 810000,
+  "dorm": 2,
+  "suites": 1,
+  "vagas": 1,
+  "area": 87,
+  "rcond": 640,
+  "iptu": 698,
+  "fotos": 24,
+  "captador": "Daniela Rocha Lima"
+ },
+ {
+  "id": "AP0159",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Itabaiana, nº 415",
+  "cond": "Mar Egeu",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 750000,
+  "dorm": 3,
+  "suites": 1,
+  "vagas": 2,
+  "area": 85,
+  "rcond": 700,
+  "iptu": 0,
+  "fotos": 20,
+  "captador": "Gladys Muniz"
+ },
+ {
+  "id": "AP0160",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Itaipava, nº 5",
+  "cond": "Itaparica Beach Club",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 850000,
+  "dorm": 2,
+  "suites": 1,
+  "vagas": 1,
+  "area": 62,
+  "rcond": 700,
+  "iptu": 0,
+  "fotos": 16,
+  "captador": "Gladys Muniz"
+ },
+ {
+  "id": "CA0013",
+  "tipo": "Casa",
+  "finalidade": "Residencial",
+  "endereco": "Rua Maria Ortiz, nº 56",
+  "cond": "",
+  "bairro": "IBES",
+  "bairroRaw": "IBES",
+  "regiao": "IBES",
+  "cidade": "Vila Velha",
+  "valor": 800000,
+  "dorm": 3,
+  "suites": 0,
+  "vagas": 2,
+  "area": 200,
+  "rcond": 0,
+  "iptu": 0,
+  "fotos": 37,
+  "captador": "Gladys Muniz"
+ },
+ {
+  "id": "AP0156",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "do Sol, nº 611",
+  "cond": "Ilha de Okinawa",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 900000,
+  "dorm": 3,
+  "suites": 3,
+  "vagas": 2,
+  "area": 75,
+  "rcond": 600,
+  "iptu": 0,
+  "fotos": 22,
+  "captador": "Paulo Cesar Barbosa Azevedo"
+ },
+ {
+  "id": "AP0155",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "do Sol, nº 611",
+  "cond": "Ilha de Okinawa",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 950000,
+  "dorm": 3,
+  "suites": 3,
+  "vagas": 2,
+  "area": 75,
+  "rcond": 600,
+  "iptu": 0,
+  "fotos": 18,
+  "captador": "Paulo Cesar Barbosa Azevedo"
+ },
+ {
+  "id": "AP0154",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Travessa São Paulo, nº 1776",
+  "cond": "Castelo de Évora",
+  "bairro": "Praia da Costa",
+  "bairroRaw": "Praia da Costa",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 1100000,
+  "dorm": 2,
+  "suites": 1,
+  "vagas": 2,
+  "area": 90,
+  "rcond": 0,
+  "iptu": 0,
+  "fotos": 10,
+  "captador": "Matheus Zamborlini"
+ },
+ {
+  "id": "AP0151",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Milton Caldeira, nº 471",
+  "cond": "Ilha de Seychelles",
+  "bairro": "Itapuã",
+  "bairroRaw": "Itapuã",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 560000,
+  "dorm": 1,
+  "suites": 0,
+  "vagas": 1,
+  "area": 47,
+  "rcond": 350,
+  "iptu": 900,
+  "fotos": 10,
+  "captador": "Marcelo Siqueira Albano da Costa"
+ },
+ {
+  "id": "AP0153",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Antônio de Almeida Filho, nº 901",
+  "cond": "Las Salinas",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 850000,
+  "dorm": 2,
+  "suites": 2,
+  "vagas": 1,
+  "area": 76,
+  "rcond": 630,
+  "iptu": 0,
+  "fotos": 15,
+  "captador": "Thayane Caroline Nogueira Miranda"
+ },
+ {
+  "id": "AP0144",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Itabaiana, nº 0",
+  "cond": "Itaville",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 820000,
+  "dorm": 2,
+  "suites": 1,
+  "vagas": 1,
+  "area": 68,
+  "rcond": 650,
+  "iptu": 0,
+  "fotos": 13,
+  "captador": "José Tarcisio dos Santos Junior"
+ },
+ {
+  "id": "AP0148",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Estudante José Júlio de Souza, nº 2170",
+  "cond": "Anneti Vitali Residence",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 1800000,
+  "dorm": 3,
+  "suites": 1,
+  "vagas": 2,
+  "area": 110,
+  "rcond": 800,
+  "iptu": 1700,
+  "fotos": 13,
+  "captador": "Daniela Rocha Lima"
+ },
+ {
+  "id": "AP0149",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Estudante José Júlio de Souza, nº 2670",
+  "cond": "Edificio Splendore",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 3590000,
+  "dorm": 4,
+  "suites": 4,
+  "vagas": 4,
+  "area": 220,
+  "rcond": 1480,
+  "iptu": 0,
+  "fotos": 29,
+  "captador": "Thayane Caroline Nogueira Miranda"
+ },
+ {
+  "id": "AP0147",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Estudante José Júlio de Souza, nº 2670",
+  "cond": "Edificio Splendore",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 3500000,
+  "dorm": 3,
+  "suites": 3,
+  "vagas": 4,
+  "area": 220,
+  "rcond": 1480,
+  "iptu": 0,
+  "fotos": 30,
+  "captador": "Thayane Caroline Nogueira Miranda"
+ },
+ {
+  "id": "AP0146",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Afonso Pena, nº 0",
+  "cond": "Botticelli",
+  "bairro": "Praia da Costa",
+  "bairroRaw": "Praia da Costa",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 2300000,
+  "dorm": 4,
+  "suites": 2,
+  "vagas": 2,
+  "area": 256,
+  "rcond": 1500,
+  "iptu": 0,
+  "fotos": 7,
+  "captador": "Livia Zamborlini Simoes Bassini"
+ },
+ {
+  "id": "AP0145",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Estudante José Júlio de Souza, nº 2170",
+  "cond": "Anneti Vitali Residence",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 1800000,
+  "dorm": 3,
+  "suites": 1,
+  "vagas": 2,
+  "area": 110,
+  "rcond": 800,
+  "iptu": 1700,
+  "fotos": 16,
+  "captador": "Daniela Rocha Lima"
+ },
+ {
+  "id": "AP0135",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Milton Caldeira, nº 299",
+  "cond": "Monte Alverne",
+  "bairro": "Itapuã",
+  "bairroRaw": "Itapuã",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 695000,
+  "dorm": 2,
+  "suites": 1,
+  "vagas": 1,
+  "area": 62,
+  "rcond": 450,
+  "iptu": 800,
+  "fotos": 14,
+  "captador": "Marcelo Siqueira Albano da Costa"
+ },
+ {
+  "id": "AP0138",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Milton Caldeira, nº 712",
+  "cond": "Edifício Costa Mare",
+  "bairro": "Itapuã",
+  "bairroRaw": "Itapuã",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 945000,
+  "dorm": 2,
+  "suites": 1,
+  "vagas": 2,
+  "area": 64,
+  "rcond": 454,
+  "iptu": 0,
+  "fotos": 11,
+  "captador": "Marcelo Siqueira Albano da Costa"
+ },
+ {
+  "id": "AP0142",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Estudante José Júlio de Souza, nº 1380",
+  "cond": "Piazza San Marco",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 4000000,
+  "dorm": 4,
+  "suites": 4,
+  "vagas": 4,
+  "area": 250,
+  "rcond": 0,
+  "iptu": 0,
+  "fotos": 26,
+  "captador": "Thayane Caroline Nogueira Miranda"
+ },
+ {
+  "id": "AP0140",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Maria de Oliveira Mares Guia, nº 44",
+  "cond": "Praia Bonita",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 900000,
+  "dorm": 2,
+  "suites": 1,
+  "vagas": 2,
+  "area": 65,
+  "rcond": 500,
+  "iptu": 0,
+  "fotos": 17,
+  "captador": "Thayane Caroline Nogueira Miranda"
+ },
+ {
+  "id": "AP0141",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Maria de Oliveira Mares Guia, nº 44",
+  "cond": "Praia Bonita",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 950000,
+  "dorm": 2,
+  "suites": 1,
+  "vagas": 2,
+  "area": 65,
+  "rcond": 600,
+  "iptu": 0,
+  "fotos": 21,
+  "captador": "Thayane Caroline Nogueira Miranda"
+ },
+ {
+  "id": "AP0137",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Itapemirim, nº 45",
+  "cond": "Residencial Parador",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 2365000,
+  "dorm": 4,
+  "suites": 2,
+  "vagas": 3,
+  "area": 154,
+  "rcond": 0,
+  "iptu": 0,
+  "fotos": 19,
+  "captador": "Livia Zamborlini Simoes Bassini"
+ },
+ {
+  "id": "AP0136",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Coronel Otto Neto, nº 270",
+  "cond": "Edifício Alba Boulevard",
+  "bairro": "Jockey de Itaparica",
+  "bairroRaw": "Jockey de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 595000,
+  "dorm": 2,
+  "suites": 1,
+  "vagas": 1,
+  "area": 56,
+  "rcond": 450,
+  "iptu": 0,
+  "fotos": 16,
+  "captador": "Marcelo Siqueira Albano da Costa"
+ },
+ {
+  "id": "AP0133",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Hugo Musso, nº 2003",
+  "cond": "Ilha de Parma",
+  "bairro": "Itapuã",
+  "bairroRaw": "Itapuã",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 997500,
+  "dorm": 2,
+  "suites": 1,
+  "vagas": 1,
+  "area": 75,
+  "rcond": 0,
+  "iptu": 0,
+  "fotos": 15,
+  "captador": "Matheus Zamborlini"
+ },
+ {
+  "id": "AP0127",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Doutor Gilson Santos, nº 140",
+  "cond": "Ilha de Manhatan",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 895000,
+  "dorm": 3,
+  "suites": 1,
+  "vagas": 2,
+  "area": 74,
+  "rcond": 690,
+  "iptu": 0,
+  "fotos": 23,
+  "captador": "THIAGO MARCHESI"
+ },
+ {
+  "id": "AP0019",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Maranhão, nº 335",
+  "cond": "Residencial Castelo de Veneza",
+  "bairro": "Praia da Costa",
+  "bairroRaw": "Praia da Costa",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 1400000,
+  "dorm": 3,
+  "suites": 1,
+  "vagas": 2,
+  "area": 128,
+  "rcond": 772,
+  "iptu": 0,
+  "fotos": 13,
+  "captador": "Matheus Zamborlini"
+ },
+ {
+  "id": "CO0005",
+  "tipo": "Cobertura",
+  "finalidade": "Residencial",
+  "endereco": "Rua Aquino Araújo, nº 77",
+  "cond": "Parque Solar Das Castanheiras / Solar Das Castanheiras",
+  "bairro": "Praia da Costa",
+  "bairroRaw": "Praia da Costa",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 5800000,
+  "dorm": 3,
+  "suites": 3,
+  "vagas": 4,
+  "area": 368,
+  "rcond": 2600,
+  "iptu": 0,
+  "fotos": 20,
+  "captador": "Daniela Rocha Lima"
+ },
+ {
+  "id": "AP0132",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Itapemirim, nº 155",
+  "cond": "Golden Star",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 950000,
+  "dorm": 2,
+  "suites": 1,
+  "vagas": 2,
+  "area": 85,
+  "rcond": 0,
+  "iptu": 0,
+  "fotos": 20,
+  "captador": "Matheus Zamborlini"
+ },
+ {
+  "id": "AP0089",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Estudante José Júlio de Souza, nº 1900",
+  "cond": "Mar Das Antilhas",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 4150000,
+  "dorm": 4,
+  "suites": 3,
+  "vagas": 3,
+  "area": 210,
+  "rcond": 1900,
+  "iptu": 0,
+  "fotos": 35,
+  "captador": "Thayane Caroline Nogueira Miranda"
+ },
+ {
+  "id": "AP0125",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Santa Catarina, nº 171",
+  "cond": "Ilha de Corais",
+  "bairro": "Praia de Itapoã",
+  "bairroRaw": "Praia de Itapoã",
+  "regiao": "Itapoã",
+  "cidade": "Vila Velha",
+  "valor": 1690000,
+  "dorm": 4,
+  "suites": 2,
+  "vagas": 2,
+  "area": 170,
+  "rcond": 990,
+  "iptu": 0,
+  "fotos": 20,
+  "captador": "Gladys Muniz"
+ },
+ {
+  "id": "AP0128",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida São Paulo, nº 1955",
+  "cond": "Brisa do Mar / Brisa do Mar/ Torre B",
+  "bairro": "Praia da Costa",
+  "bairroRaw": "Praia da Costa",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 2250000,
+  "dorm": 4,
+  "suites": 1,
+  "vagas": 2,
+  "area": 195,
+  "rcond": 0,
+  "iptu": 0,
+  "fotos": 30,
+  "captador": "THIAGO MARCHESI"
+ },
+ {
+  "id": "AP0129",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Saturnino Rangel Mauro, nº 345",
+  "cond": "Ilhas de Kiribati",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 950000,
+  "dorm": 2,
+  "suites": 1,
+  "vagas": 1,
+  "area": 60,
+  "rcond": 900,
+  "iptu": 0,
+  "fotos": 18,
+  "captador": "Thayane Caroline Nogueira Miranda"
+ },
+ {
+  "id": "AP0121",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Estudante José Júlio de Souza, nº 1730",
+  "cond": "Philadelphia",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 1370000,
+  "dorm": 3,
+  "suites": 1,
+  "vagas": 2,
+  "area": 135,
+  "rcond": 1200,
+  "iptu": 0,
+  "fotos": 31,
+  "captador": "Gladys Muniz"
+ },
+ {
+  "id": "AP0120",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Ayrton Senna da Silva, nº 100",
+  "cond": "Jazz Residences",
+  "bairro": "Itapuã",
+  "bairroRaw": "Itapuã",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 3200000,
+  "dorm": 3,
+  "suites": 3,
+  "vagas": 3,
+  "area": 159,
+  "rcond": 2000,
+  "iptu": 0,
+  "fotos": 18,
+  "captador": "Thayane Caroline Nogueira Miranda"
+ },
+ {
+  "id": "TE0007",
+  "tipo": "Terreno",
+  "finalidade": "Residencial",
+  "endereco": "Rota do Lagarto, Lt. 14",
+  "cond": "Aldeia Eco da Floresta",
+  "bairro": "Pedra Azul",
+  "bairroRaw": "Pedra Azul",
+  "regiao": "Pedra Azul",
+  "cidade": "Domingos Martins",
+  "valor": 1200000,
+  "dorm": 0,
+  "suites": 0,
+  "vagas": 0,
+  "area": 1588,
+  "rcond": 1080,
+  "iptu": 1900,
+  "fotos": 8,
+  "captador": "Leonardo Moraes dos Santos"
+ },
+ {
+  "id": "AP0116",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Maria de Oliveira Mares Guia, nº 44",
+  "cond": "Praia Bonita",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 1020000,
+  "dorm": 2,
+  "suites": 1,
+  "vagas": 0,
+  "area": 65,
+  "rcond": 600,
+  "iptu": 0,
+  "fotos": 8,
+  "captador": "Thayane Caroline Nogueira Miranda"
+ },
+ {
+  "id": "AP0106",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Anésio Alvarenga, nº 100",
+  "cond": "Terrace",
+  "bairro": "Itapuã",
+  "bairroRaw": "Itapuã",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 1050000,
+  "dorm": 2,
+  "suites": 1,
+  "vagas": 1,
+  "area": 67,
+  "rcond": 0,
+  "iptu": 0,
+  "fotos": 12,
+  "captador": "Eduardo Corona"
+ },
+ {
+  "id": "AP0107",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Anésio Alvarenga, nº 100",
+  "cond": "Terrace",
+  "bairro": "Itapuã",
+  "bairroRaw": "Itapuã",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 1100000,
+  "dorm": 2,
+  "suites": 1,
+  "vagas": 1,
+  "area": 67,
+  "rcond": 0,
+  "iptu": 0,
+  "fotos": 26,
+  "captador": "Eduardo Corona"
+ },
+ {
+  "id": "AP0108",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Anésio Alvarenga, nº 100",
+  "cond": "Terrace",
+  "bairro": "Itapuã",
+  "bairroRaw": "Itapuã",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 1150000,
+  "dorm": 2,
+  "suites": 1,
+  "vagas": 1,
+  "area": 67,
+  "rcond": 0,
+  "iptu": 0,
+  "fotos": 26,
+  "captador": "Eduardo Corona"
+ },
+ {
+  "id": "AP0126",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Maria de Oliveira Mares Guia, nº 101",
+  "cond": "Europa Towers / Roma",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 1250000,
+  "dorm": 3,
+  "suites": 1,
+  "vagas": 2,
+  "area": 120,
+  "rcond": 615,
+  "iptu": 0,
+  "fotos": 17,
+  "captador": "Gladys Muniz"
+ },
+ {
+  "id": "AP0124",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Ibitirama, nº 80",
+  "cond": "Coral Vermelho",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 950000,
+  "dorm": 3,
+  "suites": 2,
+  "vagas": 0,
+  "area": 145,
+  "rcond": 700,
+  "iptu": 0,
+  "fotos": 23,
+  "captador": "Gladys Muniz"
+ },
+ {
+  "id": "AP0123",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Piratininga, nº 111",
+  "cond": "San Blas",
+  "bairro": "Praia da Costa",
+  "bairroRaw": "Praia da Costa",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 2300000,
+  "dorm": 2,
+  "suites": 1,
+  "vagas": 2,
+  "area": 130,
+  "rcond": 800,
+  "iptu": 0,
+  "fotos": 17,
+  "captador": "Gladys Muniz"
+ },
+ {
+  "id": "CA0008",
+  "tipo": "Casa",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Carlos Alladyr de Oliveira Larica, nº 278",
+  "cond": "Condomínio Alphaville Jacuhy",
+  "bairro": "Alphaville Jacuhy",
+  "bairroRaw": "Alphaville Jacuhy",
+  "regiao": "Alphaville Jacuhy",
+  "cidade": "Serra",
+  "valor": 2900000,
+  "dorm": 4,
+  "suites": 4,
+  "vagas": 4,
+  "area": 300,
+  "rcond": 1080,
+  "iptu": 900,
+  "fotos": 12,
+  "captador": "Eduardo Corona"
+ },
+ {
+  "id": "AP0109",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Anésio Alvarenga, nº 100",
+  "cond": "Terrace",
+  "bairro": "Parque das Castanheiras",
+  "bairroRaw": "Parque das Castanheiras",
+  "regiao": "Parque das Castanheiras",
+  "cidade": "Vila Velha",
+  "valor": 2000000,
+  "dorm": 3,
+  "suites": 1,
+  "vagas": 2,
+  "area": 98,
+  "rcond": 0,
+  "iptu": 0,
+  "fotos": 35,
+  "captador": "Eduardo Corona"
+ },
+ {
+  "id": "AP0119",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Darly Santos, nº 5500",
+  "cond": "Costa Mare Residence Club",
+  "bairro": "Darly Santos",
+  "bairroRaw": "Darly Santos",
+  "regiao": "Darly Santos",
+  "cidade": "Vila Velha",
+  "valor": 2700000,
+  "dorm": 4,
+  "suites": 4,
+  "vagas": 4,
+  "area": 188,
+  "rcond": 1600,
+  "iptu": 0,
+  "fotos": 5,
+  "captador": "GUSTAVO NEIVA TEIXEIRA"
+ },
+ {
+  "id": "AP0118",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Saturnino Rangel Mauro, nº 2675",
+  "cond": "",
+  "bairro": "Itaparica",
+  "bairroRaw": "Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 1050000,
+  "dorm": 3,
+  "suites": 1,
+  "vagas": 2,
+  "area": 78,
+  "rcond": 850,
+  "iptu": 0,
+  "fotos": 30,
+  "captador": "Thayane Caroline Nogueira Miranda"
+ },
+ {
+  "id": "AP0117",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Estudante José Júlio de Souza, nº 1900",
+  "cond": "Mar Das Antilhas",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 3200000,
+  "dorm": 4,
+  "suites": 3,
+  "vagas": 3,
+  "area": 164,
+  "rcond": 2000,
+  "iptu": 0,
+  "fotos": 13,
+  "captador": "Thayane Caroline Nogueira Miranda"
+ },
+ {
+  "id": "AP0115",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Goiânia, nº 111",
+  "cond": "Carolina Caliari",
+  "bairro": "Praia de Itapoã",
+  "bairroRaw": "Itapoa",
+  "regiao": "Itapoã",
+  "cidade": "Vila Velha",
+  "valor": 2600000,
+  "dorm": 3,
+  "suites": 2,
+  "vagas": 2,
+  "area": 109,
+  "rcond": 800,
+  "iptu": 0,
+  "fotos": 10,
+  "captador": "Daniela Rocha Lima"
+ },
+ {
+  "id": "PT0001",
+  "tipo": "Ponto",
+  "finalidade": "Comercial",
+  "endereco": "Avenida Antônio de Almeida Filho, nº 1008",
+  "cond": "",
+  "bairro": "Itaparica",
+  "bairroRaw": "Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 450000,
+  "dorm": 0,
+  "suites": 0,
+  "vagas": 0,
+  "area": 47,
+  "rcond": 0,
+  "iptu": 0,
+  "fotos": 4,
+  "captador": "Thayane Caroline Nogueira Miranda"
+ },
+ {
+  "id": "LO0003",
+  "tipo": "Loja",
+  "finalidade": "Comercial",
+  "endereco": "Avenida Antônio Almeida Filho, nº 1008",
+  "cond": "Nápoles",
+  "bairro": "Itaparica",
+  "bairroRaw": "Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 450000,
+  "dorm": 0,
+  "suites": 0,
+  "vagas": 0,
+  "area": 46,
+  "rcond": 300,
+  "iptu": 0,
+  "fotos": 4,
+  "captador": "Daniela Rocha Lima"
+ },
+ {
+  "id": "TE0006",
+  "tipo": "Terreno",
+  "finalidade": "Residencial",
+  "endereco": "Rua Girassol, nº 0",
+  "cond": "Condomínio Riviera Park Residence",
+  "bairro": "Santa Paula II",
+  "bairroRaw": "Santa Paula II",
+  "regiao": "Santa Paula II",
+  "cidade": "Vila Velha",
+  "valor": 620000,
+  "dorm": 0,
+  "suites": 0,
+  "vagas": 0,
+  "area": 600,
+  "rcond": 1100,
+  "iptu": 0,
+  "fotos": 16,
+  "captador": "Luciana Paúra de Siqueira da Costa"
+ },
+ {
+  "id": "AP0114",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rodovia do Sol, nº 2670",
+  "cond": "Edifício Vernazza",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 1170000,
+  "dorm": 3,
+  "suites": 1,
+  "vagas": 3,
+  "area": 110,
+  "rcond": 850,
+  "iptu": 0,
+  "fotos": 12,
+  "captador": "Marcelo Siqueira Albano da Costa"
+ },
+ {
+  "id": "AP0112",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Itapemirim, nº 45",
+  "cond": "Residencial Parador",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 2650000,
+  "dorm": 3,
+  "suites": 2,
+  "vagas": 3,
+  "area": 148,
+  "rcond": 1600,
+  "iptu": 0,
+  "fotos": 25,
+  "captador": "Thayane Caroline Nogueira Miranda"
+ },
+ {
+  "id": "AP0113",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Ayrton Senna da Silva, nº 303",
+  "cond": "Praia Grande",
+  "bairro": "Praia de Itapoã",
+  "bairroRaw": "Praia de Itapoã",
+  "regiao": "Itapoã",
+  "cidade": "Vila Velha",
+  "valor": 820000,
+  "dorm": 3,
+  "suites": 1,
+  "vagas": 0,
+  "area": 92,
+  "rcond": 600,
+  "iptu": 0,
+  "fotos": 31,
+  "captador": "Daives Madeira"
+ },
+ {
+  "id": "AP0057",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua São Paulo, nº 2490",
+  "cond": "Porto Das Ondas",
+  "bairro": "Itapuã",
+  "bairroRaw": "Itapuã",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 1160000,
+  "dorm": 3,
+  "suites": 1,
+  "vagas": 2,
+  "area": 110,
+  "rcond": 700,
+  "iptu": 0,
+  "fotos": 15,
+  "captador": "Marlos Braun Sampaio"
+ },
+ {
+  "id": "AP0102",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Ayrton Senna da Silva, nº 100",
+  "cond": "Jazz Residences",
+  "bairro": "Itapuã",
+  "bairroRaw": "Itapuã",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 2200000,
+  "dorm": 4,
+  "suites": 3,
+  "vagas": 2,
+  "area": 137,
+  "rcond": 0,
+  "iptu": 0,
+  "fotos": 12,
+  "captador": "Eduardo Corona"
+ },
+ {
+  "id": "AP0111",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Erothildes Penna Medina, nº 50",
+  "cond": "Parc Des Prince",
+  "bairro": "Praia da Costa",
+  "bairroRaw": "Praia da Costa",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 2174000,
+  "dorm": 4,
+  "suites": 2,
+  "vagas": 0,
+  "area": 180,
+  "rcond": 1300,
+  "iptu": 0,
+  "fotos": 20,
+  "captador": "Daives Madeira"
+ },
+ {
+  "id": "CA0010",
+  "tipo": "Casa",
+  "finalidade": "Residencial",
+  "endereco": "Rua Santa Catarina, nº 373",
+  "cond": "",
+  "bairro": "Itapuã",
+  "bairroRaw": "Itapuã",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 1900000,
+  "dorm": 2,
+  "suites": 2,
+  "vagas": 0,
+  "area": 93,
+  "rcond": 0,
+  "iptu": 1600,
+  "fotos": 13,
+  "captador": "Leonardo Moraes dos Santos"
+ },
+ {
+  "id": "AP0079",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Rio Branco, nº 340",
+  "cond": "Geraldo Pacheco",
+  "bairro": "Praia da Costa",
+  "bairroRaw": "Praia da Costa",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 880000,
+  "dorm": 2,
+  "suites": 1,
+  "vagas": 1,
+  "area": 82,
+  "rcond": 640,
+  "iptu": 1500,
+  "fotos": 12,
+  "captador": "Bruno Severnini Penna Rocha"
+ },
+ {
+  "id": "AP0110",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "do Sol, nº 2031",
+  "cond": "Sky Garden Residence",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 860000,
+  "dorm": 2,
+  "suites": 1,
+  "vagas": 1,
+  "area": 65,
+  "rcond": 600,
+  "iptu": 0,
+  "fotos": 36,
+  "captador": "Daives Madeira"
+ },
+ {
+  "id": "AP0104",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Santa Catarina, nº 150",
+  "cond": "Montreal",
+  "bairro": "Praia da Costa",
+  "bairroRaw": "Praia da Costa",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 1790000,
+  "dorm": 4,
+  "suites": 3,
+  "vagas": 0,
+  "area": 170,
+  "rcond": 0,
+  "iptu": 0,
+  "fotos": 9,
+  "captador": "Luciana Paúra de Siqueira da Costa"
+ },
+ {
+  "id": "AP0103",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Santa Catarina, nº 150",
+  "cond": "Montreal",
+  "bairro": "Praia da Costa",
+  "bairroRaw": "Praia da Costa",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 1790000,
+  "dorm": 4,
+  "suites": 3,
+  "vagas": 0,
+  "area": 170,
+  "rcond": 950,
+  "iptu": 0,
+  "fotos": 20,
+  "captador": "Daives Madeira"
+ },
+ {
+  "id": "AT0001",
+  "tipo": "Apartamento Triplex",
+  "finalidade": "Residencial",
+  "endereco": "Rua Jofredo Novais, nº 91",
+  "cond": "Durval Avidos",
+  "bairro": "Praia da Costa",
+  "bairroRaw": "Praia da Costa",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 5000000,
+  "dorm": 5,
+  "suites": 1,
+  "vagas": 0,
+  "area": 650,
+  "rcond": 2100,
+  "iptu": 0,
+  "fotos": 34,
+  "captador": "Daives Madeira"
+ },
+ {
+  "id": "AP0080",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Resplendor, nº 511",
+  "cond": "Residencial Chateuax de France",
+  "bairro": "Itapuã",
+  "bairroRaw": "Itapuã",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 530000,
+  "dorm": 2,
+  "suites": 0,
+  "vagas": 2,
+  "area": 74,
+  "rcond": 0,
+  "iptu": 0,
+  "fotos": 10,
+  "captador": "GUSTAVO NEIVA TEIXEIRA"
+ },
+ {
+  "id": "AP0101",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Saturnino Rangel Mauro, nº 345",
+  "cond": "Ilhas de Kiribati",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 1400000,
+  "dorm": 3,
+  "suites": 2,
+  "vagas": 3,
+  "area": 98,
+  "rcond": 1100,
+  "iptu": 0,
+  "fotos": 22,
+  "captador": "Thayane Caroline Nogueira Miranda"
+ },
+ {
+  "id": "TE0004",
+  "tipo": "Terreno",
+  "finalidade": "Residencial",
+  "endereco": "Rodovia Do Sol, nº 13",
+  "cond": "Condomínio Jardins Veneza",
+  "bairro": "Interlagos",
+  "bairroRaw": "Interlagos",
+  "regiao": "Interlagos",
+  "cidade": "Vila Velha",
+  "valor": 660000,
+  "dorm": 0,
+  "suites": 0,
+  "vagas": 0,
+  "area": 562,
+  "rcond": 1000,
+  "iptu": 0,
+  "fotos": 12,
+  "captador": "Luciana Paúra de Siqueira da Costa"
+ },
+ {
+  "id": "AP0098",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rodovia do Sol, nº 1740",
+  "cond": "Atlantic Star",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 880000,
+  "dorm": 3,
+  "suites": 1,
+  "vagas": 2,
+  "area": 75,
+  "rcond": 480,
+  "iptu": 904,
+  "fotos": 24,
+  "captador": "Daniela Rocha Lima"
+ },
+ {
+  "id": "AP0096",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Praia das Gaivotas, nº 275",
+  "cond": "Monte Aghá",
+  "bairro": "Praia das Gaivotas",
+  "bairroRaw": "Praia das Gaivotas",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 630000,
+  "dorm": 3,
+  "suites": 1,
+  "vagas": 1,
+  "area": 93,
+  "rcond": 500,
+  "iptu": 0,
+  "fotos": 17,
+  "captador": "Eduardo Corona"
+ },
+ {
+  "id": "AP0043",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Antônio Almeida Filho, nº 640",
+  "cond": "Edifício Amazônia Residencial",
+  "bairro": "Itaparica",
+  "bairroRaw": "Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 790000,
+  "dorm": 2,
+  "suites": 1,
+  "vagas": 1,
+  "area": 62,
+  "rcond": 335,
+  "iptu": 1500,
+  "fotos": 9,
+  "captador": "Daniele Goulart Martins"
+ },
+ {
+  "id": "AP0095",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Niterói, nº 65",
+  "cond": "Ile de France",
+  "bairro": "Praia de Itapoã",
+  "bairroRaw": "Praia de Itapoã",
+  "regiao": "Itapoã",
+  "cidade": "Vila Velha",
+  "valor": 1800000,
+  "dorm": 4,
+  "suites": 2,
+  "vagas": 2,
+  "area": 180,
+  "rcond": 1256,
+  "iptu": 2106,
+  "fotos": 23,
+  "captador": "THIAGO MARCHESI"
+ },
+ {
+  "id": "AP0091",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Antônio Gil Veloso, nº 2446",
+  "cond": "Nagib Carone",
+  "bairro": "Praia de Itapoã",
+  "bairroRaw": "Praia de Itapoã",
+  "regiao": "Itapoã",
+  "cidade": "Vila Velha",
+  "valor": 4200000,
+  "dorm": 4,
+  "suites": 2,
+  "vagas": 0,
+  "area": 146,
+  "rcond": 1400,
+  "iptu": 0,
+  "fotos": 25,
+  "captador": "Ivie Amorim"
+ },
+ {
+  "id": "AP0092",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Gastão Roubach, nº 130",
+  "cond": "Edificio Marine",
+  "bairro": "Praia da Costa",
+  "bairroRaw": "Praia da Costa",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 1950000,
+  "dorm": 3,
+  "suites": 1,
+  "vagas": 2,
+  "area": 146,
+  "rcond": 0,
+  "iptu": 0,
+  "fotos": 19,
+  "captador": "Livia Zamborlini Simoes Bassini"
+ },
+ {
+  "id": "AP0074",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Niterói, nº 65",
+  "cond": "Ile de France",
+  "bairro": "Praia de Itapoã",
+  "bairroRaw": "Praia de Itapoã",
+  "regiao": "Itapoã",
+  "cidade": "Vila Velha",
+  "valor": 2300000,
+  "dorm": 4,
+  "suites": 2,
+  "vagas": 3,
+  "area": 169,
+  "rcond": 1630,
+  "iptu": 2000,
+  "fotos": 28,
+  "captador": "Ivie Amorim"
+ },
+ {
+  "id": "AP0035",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Rio Branco, nº 123",
+  "cond": "Clermont Ferrand",
+  "bairro": "Praia da Costa",
+  "bairroRaw": "Praia da Costa",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 1700000,
+  "dorm": 3,
+  "suites": 1,
+  "vagas": 2,
+  "area": 178,
+  "rcond": 1200,
+  "iptu": 0,
+  "fotos": 20,
+  "captador": "Thayane Caroline Nogueira Miranda"
+ },
+ {
+  "id": "AP0033",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Maria de Oliveira Mares Guia, nº 101",
+  "cond": "Europa Towers / Não informado",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 1497000,
+  "dorm": 3,
+  "suites": 1,
+  "vagas": 2,
+  "area": 128,
+  "rcond": 1270,
+  "iptu": 0,
+  "fotos": 18,
+  "captador": "Paulo Cesar Barbosa Azevedo"
+ },
+ {
+  "id": "AP0040",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Muqui, nº 805",
+  "cond": "Cannes Residence",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 682500,
+  "dorm": 2,
+  "suites": 1,
+  "vagas": 1,
+  "area": 65,
+  "rcond": 630,
+  "iptu": 0,
+  "fotos": 18,
+  "captador": "Thayane Caroline Nogueira Miranda"
+ },
+ {
+  "id": "AP0029",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Antônio Gil Vellozo, nº 756",
+  "cond": "Residencial Marbella",
+  "bairro": "Praia da Costa",
+  "bairroRaw": "Praia da Costa",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 5780000,
+  "dorm": 4,
+  "suites": 2,
+  "vagas": 2,
+  "area": 282,
+  "rcond": 2340,
+  "iptu": 0,
+  "fotos": 18,
+  "captador": "Thayane Caroline Nogueira Miranda"
+ },
+ {
+  "id": "AP0062",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Saturnino Rangel Mauro, nº 2048",
+  "cond": "Ilhas do Caribe",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 700000,
+  "dorm": 2,
+  "suites": 1,
+  "vagas": 2,
+  "area": 65,
+  "rcond": 750,
+  "iptu": 0,
+  "fotos": 16,
+  "captador": "Thayane Caroline Nogueira Miranda"
+ },
+ {
+  "id": "AP0085",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Antônio Gil Veloso, nº 1346",
+  "cond": "Monaliza",
+  "bairro": "Praia da Costa",
+  "bairroRaw": "Praia da Costa",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 4500000,
+  "dorm": 4,
+  "suites": 2,
+  "vagas": 2,
+  "area": 340,
+  "rcond": 2600,
+  "iptu": 0,
+  "fotos": 11,
+  "captador": "Marcelo Siqueira Albano da Costa"
+ },
+ {
+  "id": "AP0086",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Desembargador Augusto Botelho, nº 514",
+  "cond": "Myrthes Vieira",
+  "bairro": "Praia da Costa",
+  "bairroRaw": "Praia da Costa",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 900000,
+  "dorm": 2,
+  "suites": 1,
+  "vagas": 0,
+  "area": 60,
+  "rcond": 850,
+  "iptu": 0,
+  "fotos": 20,
+  "captador": "Ivie Amorim"
+ },
+ {
+  "id": "AP0082",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Antônio Gil Veloso, nº 1108",
+  "cond": "Hilma Park",
+  "bairro": "Praia da Costa",
+  "bairroRaw": "Praia da Costa",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 3700000,
+  "dorm": 4,
+  "suites": 2,
+  "vagas": 2,
+  "area": 315,
+  "rcond": 980,
+  "iptu": 0,
+  "fotos": 24,
+  "captador": "Daniela Rocha Lima"
+ },
+ {
+  "id": "AP0084",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Perimetral, nº 500",
+  "cond": "Modan 500",
+  "bairro": "Coqueiral de Itaparica",
+  "bairroRaw": "Coqueiral de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 460000,
+  "dorm": 1,
+  "suites": 0,
+  "vagas": 1,
+  "area": 36,
+  "rcond": 0,
+  "iptu": 0,
+  "fotos": 10,
+  "captador": "Leonardo Moraes dos Santos"
+ },
+ {
+  "id": "TE0003",
+  "tipo": "Terreno",
+  "finalidade": "Residencial",
+  "endereco": "Rua Paulo Cesar Vinha, nº 56",
+  "cond": "Condomínio Riviera Park Residence",
+  "bairro": "Santa Paula",
+  "bairroRaw": "Santa Paula",
+  "regiao": "Santa Paula",
+  "cidade": "Vila Velha",
+  "valor": 750000,
+  "dorm": 0,
+  "suites": 0,
+  "vagas": 0,
+  "area": 600,
+  "rcond": 1200,
+  "iptu": 2700,
+  "fotos": 8,
+  "captador": "Ivie Amorim"
+ },
+ {
+  "id": "AP0081",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Rio Branco, nº 100",
+  "cond": "Edifício Puebla",
+  "bairro": "Parque das Castanheiras",
+  "bairroRaw": "Parque das Castanheiras",
+  "regiao": "Parque das Castanheiras",
+  "cidade": "Vila Velha",
+  "valor": 1490000,
+  "dorm": 3,
+  "suites": 1,
+  "vagas": 2,
+  "area": 158,
+  "rcond": 850,
+  "iptu": 905,
+  "fotos": 17,
+  "captador": "Eduardo Corona"
+ },
+ {
+  "id": "AP0078",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Antônio Gil Veloso, nº 1026",
+  "cond": "William Zogaib",
+  "bairro": "Praia da Costa",
+  "bairroRaw": "Praia da Costa",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 3980000,
+  "dorm": 4,
+  "suites": 4,
+  "vagas": 0,
+  "area": 350,
+  "rcond": 4310,
+  "iptu": 4050,
+  "fotos": 32,
+  "captador": "Ivie Amorim"
+ },
+ {
+  "id": "CA0009",
+  "tipo": "Casa",
+  "finalidade": "Residencial",
+  "endereco": "Rua Coronel Sodré, nº 0",
+  "cond": "Casa Prainha",
+  "bairro": "Centro",
+  "bairroRaw": "Centro",
+  "regiao": "Centro",
+  "cidade": "Vila Velha",
+  "valor": 4000000,
+  "dorm": 6,
+  "suites": 5,
+  "vagas": 0,
+  "area": 576,
+  "rcond": 0,
+  "iptu": 0,
+  "fotos": 16,
+  "captador": "Livia Zamborlini Simoes Bassini"
+ },
+ {
+  "id": "AP0077",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Hugo Musso, nº 1391",
+  "cond": "Maria Christina",
+  "bairro": "Praia da Costa",
+  "bairroRaw": "Praia da Costa",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 1200000,
+  "dorm": 3,
+  "suites": 1,
+  "vagas": 2,
+  "area": 110,
+  "rcond": 905,
+  "iptu": 1920,
+  "fotos": 27,
+  "captador": "Ivie Amorim"
+ },
+ {
+  "id": "AP0073",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Antônio Gil Veloso, nº 2556",
+  "cond": "Sur La Plage",
+  "bairro": "Praia de Itapoã",
+  "bairroRaw": "Praia de Itapoã",
+  "regiao": "Itapoã",
+  "cidade": "Vila Velha",
+  "valor": 3500000,
+  "dorm": 4,
+  "suites": 2,
+  "vagas": 2,
+  "area": 298,
+  "rcond": 2042,
+  "iptu": 3372,
+  "fotos": 34,
+  "captador": "Ivie Amorim"
+ },
+ {
+  "id": "CA0007",
+  "tipo": "Casa",
+  "finalidade": "Residencial",
+  "endereco": "Rua Angelina Martins Leal, nº 266",
+  "cond": "",
+  "bairro": "Praia da Costa",
+  "bairroRaw": "Praia da Costa",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 3950000,
+  "dorm": 4,
+  "suites": 4,
+  "vagas": 5,
+  "area": 422,
+  "rcond": 0,
+  "iptu": 0,
+  "fotos": 10,
+  "captador": "Matheus Zamborlini"
+ },
+ {
+  "id": "CA0006",
+  "tipo": "Casa",
+  "finalidade": "Residencial",
+  "endereco": "Estrada Retiro do Congo, nº 0",
+  "cond": "",
+  "bairro": "Retiro do Congo",
+  "bairroRaw": "Retiro do Congo",
+  "regiao": "Retiro do Congo",
+  "cidade": "Vila Velha",
+  "valor": 1500000,
+  "dorm": 3,
+  "suites": 2,
+  "vagas": 0,
+  "area": 450,
+  "rcond": 0,
+  "iptu": 0,
+  "fotos": 9,
+  "captador": "Marlos Braun Sampaio"
+ },
+ {
+  "id": "CO0004",
+  "tipo": "Cobertura",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Antonio Gil Veloso, nº 2200",
+  "cond": "Edificio Bertolo Malacarne",
+  "bairro": "Praia da Costa",
+  "bairroRaw": "Praia da Costa",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 7500000,
+  "dorm": 5,
+  "suites": 3,
+  "vagas": 3,
+  "area": 600,
+  "rcond": 1400,
+  "iptu": 0,
+  "fotos": 33,
+  "captador": "Matheus Zamborlini"
+ },
+ {
+  "id": "AP0072",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Coronel Otto Netto, nº 222",
+  "cond": "Edifício Palmer Boulevard",
+  "bairro": "Jockey de Itaparica",
+  "bairroRaw": "Jockey de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 776000,
+  "dorm": 2,
+  "suites": 1,
+  "vagas": 2,
+  "area": 58,
+  "rcond": 450,
+  "iptu": 0,
+  "fotos": 14,
+  "captador": "Marcelo Siqueira Albano da Costa"
+ },
+ {
+  "id": "AP0069",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Hugo Musso, nº 1555",
+  "cond": "Edifício Ilha de Creta",
+  "bairro": "Praia de Itapoã",
+  "bairroRaw": "Praia de Itapoã",
+  "regiao": "Itapoã",
+  "cidade": "Vila Velha",
+  "valor": 950000,
+  "dorm": 2,
+  "suites": 1,
+  "vagas": 2,
+  "area": 75,
+  "rcond": 650,
+  "iptu": 0,
+  "fotos": 13,
+  "captador": "Marcelo Siqueira Albano da Costa"
+ },
+ {
+  "id": "SA0001",
+  "tipo": "Sala",
+  "finalidade": "Comercial",
+  "endereco": "Avenida Champagnat, nº 583",
+  "cond": "Dr Nilton Barros",
+  "bairro": "Centro",
+  "bairroRaw": "Centro",
+  "regiao": "Centro",
+  "cidade": "Vila Velha",
+  "valor": 180000,
+  "dorm": 0,
+  "suites": 0,
+  "vagas": 1,
+  "area": 40,
+  "rcond": 550,
+  "iptu": 0,
+  "fotos": 7,
+  "captador": "Livia Zamborlini Simoes Bassini"
+ },
+ {
+  "id": "AP0075",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Antônio Gil Vellozo, nº 1052",
+  "cond": "Edifício Mirage",
+  "bairro": "Praia da Costa",
+  "bairroRaw": "Praia da Costa",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 1300000,
+  "dorm": 3,
+  "suites": 1,
+  "vagas": 2,
+  "area": 90,
+  "rcond": 1500,
+  "iptu": 1435,
+  "fotos": 16,
+  "captador": "Marcelo Siqueira Albano da Costa"
+ },
+ {
+  "id": "AP0065",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Luiz Fernandes Reis, nº 301",
+  "cond": "Royal Palace",
+  "bairro": "Praia da Costa",
+  "bairroRaw": "Praia da Costa",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 1890000,
+  "dorm": 4,
+  "suites": 2,
+  "vagas": 2,
+  "area": 180,
+  "rcond": 1050,
+  "iptu": 0,
+  "fotos": 31,
+  "captador": "Daniela Rocha Lima"
+ },
+ {
+  "id": "AP0053",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Afonso Pena, nº 201",
+  "cond": "Castelo de Maróstica",
+  "bairro": "Praia da Costa",
+  "bairroRaw": "Praia da Costa",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 895000,
+  "dorm": 2,
+  "suites": 1,
+  "vagas": 1,
+  "area": 87,
+  "rcond": 600,
+  "iptu": 0,
+  "fotos": 16,
+  "captador": "Daniela Rocha Lima"
+ },
+ {
+  "id": "AP0066",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida São Paulo, nº 2049",
+  "cond": "Edifício Walter Casagrande",
+  "bairro": "Praia da Costa",
+  "bairroRaw": "Praia da Costa",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 1380000,
+  "dorm": 3,
+  "suites": 1,
+  "vagas": 2,
+  "area": 141,
+  "rcond": 750,
+  "iptu": 0,
+  "fotos": 19,
+  "captador": "Marcelo Siqueira Albano da Costa"
+ },
+ {
+  "id": "AP0067",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Saturnino Rangel Mauro, nº 3250",
+  "cond": "Ed Vila D’ita",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 760000,
+  "dorm": 3,
+  "suites": 1,
+  "vagas": 1,
+  "area": 80,
+  "rcond": 460,
+  "iptu": 0,
+  "fotos": 13,
+  "captador": "Livia Zamborlini Simoes Bassini"
+ },
+ {
+  "id": "AP0068",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Antônio Gil Veloso, nº 240",
+  "cond": "Villa Veneto",
+  "bairro": "Praia da Costa",
+  "bairroRaw": "Praia da Costa",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 1900000,
+  "dorm": 3,
+  "suites": 1,
+  "vagas": 1,
+  "area": 135,
+  "rcond": 900,
+  "iptu": 0,
+  "fotos": 13,
+  "captador": "Thayane Caroline Nogueira Miranda"
+ },
+ {
+  "id": "AP0064",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Maria de Oliveira Mares Guia, nº 101",
+  "cond": "Europa Towers / Paris",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 1280000,
+  "dorm": 3,
+  "suites": 1,
+  "vagas": 2,
+  "area": 123,
+  "rcond": 615,
+  "iptu": 1800,
+  "fotos": 21,
+  "captador": "Leonardo Moraes dos Santos"
+ },
+ {
+  "id": "CO0001",
+  "tipo": "Cobertura",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Saturnino Rangel Mauro, nº 3225",
+  "cond": "Ilha de Key West",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 1590000,
+  "dorm": 4,
+  "suites": 4,
+  "vagas": 2,
+  "area": 140,
+  "rcond": 580,
+  "iptu": 0,
+  "fotos": 9,
+  "captador": "Marcelo Siqueira Albano da Costa"
+ },
+ {
+  "id": "AP0063",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Desembargador Augusto Botelho, nº 333",
+  "cond": "Edifício Residencial Espelho D Água",
+  "bairro": "Praia da Costa",
+  "bairroRaw": "Praia da Costa",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 2490000,
+  "dorm": 4,
+  "suites": 2,
+  "vagas": 0,
+  "area": 176,
+  "rcond": 1400,
+  "iptu": 2500,
+  "fotos": 28,
+  "captador": "Daives Madeira"
+ },
+ {
+  "id": "AP0061",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua João Joaquim da Mota, nº 335",
+  "cond": "Berthô / A",
+  "bairro": "Praia da Costa",
+  "bairroRaw": "Praia da Costa",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 6000000,
+  "dorm": 4,
+  "suites": 4,
+  "vagas": 0,
+  "area": 272,
+  "rcond": 0,
+  "iptu": 0,
+  "fotos": 20,
+  "captador": "Leonardo Moraes dos Santos"
+ },
+ {
+  "id": "TE0002",
+  "tipo": "Terreno",
+  "finalidade": "Residencial",
+  "endereco": "BR-262, nº 0",
+  "cond": "Refúgios Pedra Azul",
+  "bairro": "Domingos Martins",
+  "bairroRaw": "Domingos Martins",
+  "regiao": "Domingos Martins",
+  "cidade": "Domingos Martins",
+  "valor": 688000,
+  "dorm": 0,
+  "suites": 0,
+  "vagas": 0,
+  "area": 561,
+  "rcond": 0,
+  "iptu": 0,
+  "fotos": 7,
+  "captador": "Marlos Braun Sampaio"
+ },
+ {
+  "id": "AP0060",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua São Paulo, nº 901",
+  "cond": "Arti Desing Living / Bella",
+  "bairro": "Praia da Costa",
+  "bairroRaw": "Praia da Costa",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 5800000,
+  "dorm": 4,
+  "suites": 4,
+  "vagas": 4,
+  "area": 216,
+  "rcond": 0,
+  "iptu": 0,
+  "fotos": 14,
+  "captador": "Leonardo Moraes dos Santos"
+ },
+ {
+  "id": "AP0059",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "do Sol, nº 1980",
+  "cond": "Reserva de Itaparica",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 750000,
+  "dorm": 2,
+  "suites": 1,
+  "vagas": 1,
+  "area": 70,
+  "rcond": 300,
+  "iptu": 0,
+  "fotos": 25,
+  "captador": "Marlos Braun Sampaio"
+ },
+ {
+  "id": "AP0038",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rodovia do Sol, nº 785",
+  "cond": "Condomínio Residencial Águas Claras",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 1050000,
+  "dorm": 3,
+  "suites": 1,
+  "vagas": 2,
+  "area": 85,
+  "rcond": 800,
+  "iptu": 0,
+  "fotos": 11,
+  "captador": "Paulo Cesar Barbosa Azevedo"
+ },
+ {
+  "id": "AP0058",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rodovia do Sol, nº 644",
+  "cond": "Edifício Acquabella",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 850000,
+  "dorm": 3,
+  "suites": 1,
+  "vagas": 1,
+  "area": 70,
+  "rcond": 550,
+  "iptu": 0,
+  "fotos": 15,
+  "captador": "Marlos Braun Sampaio"
+ },
+ {
+  "id": "AP0054",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rodovia do Sol, nº 2820",
+  "cond": "Edifício Itaparica Exclusive",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 749000,
+  "dorm": 2,
+  "suites": 1,
+  "vagas": 1,
+  "area": 74,
+  "rcond": 480,
+  "iptu": 1200,
+  "fotos": 18,
+  "captador": "Marcelo Siqueira Albano da Costa"
+ },
+ {
+  "id": "AP0047",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rodovia do Sol, nº 808",
+  "cond": "Edifício Ilhas de Veneza",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 760000,
+  "dorm": 2,
+  "suites": 1,
+  "vagas": 1,
+  "area": 65,
+  "rcond": 600,
+  "iptu": 0,
+  "fotos": 23,
+  "captador": "Paulo Cesar Barbosa Azevedo"
+ },
+ {
+  "id": "AP0055",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida João Mendes, nº 0",
+  "cond": "Edifício Ilhas de Maui",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 765000,
+  "dorm": 2,
+  "suites": 1,
+  "vagas": 1,
+  "area": 58,
+  "rcond": 0,
+  "iptu": 0,
+  "fotos": 13,
+  "captador": "Daniele Goulart Martins"
+ },
+ {
+  "id": "AP0045",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Santa Leopoldina, nº 250",
+  "cond": "Condomínio Segunda Etapa",
+  "bairro": "Coqueiral de Itaparica",
+  "bairroRaw": "Coqueiral de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 499000,
+  "dorm": 3,
+  "suites": 0,
+  "vagas": 1,
+  "area": 102,
+  "rcond": 450,
+  "iptu": 0,
+  "fotos": 9,
+  "captador": "Daniele Goulart Martins"
+ },
+ {
+  "id": "AP0046",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Estudante José Júlio de Souza, nº 3370",
+  "cond": "Edifício Leda Passos",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 2800000,
+  "dorm": 4,
+  "suites": 1,
+  "vagas": 3,
+  "area": 180,
+  "rcond": 1130,
+  "iptu": 0,
+  "fotos": 15,
+  "captador": "Paulo Cesar Barbosa Azevedo"
+ },
+ {
+  "id": "AP0048",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Itapemirim, nº 45",
+  "cond": "Residencial Parador",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 5039000,
+  "dorm": 4,
+  "suites": 4,
+  "vagas": 4,
+  "area": 209,
+  "rcond": 1750,
+  "iptu": 0,
+  "fotos": 33,
+  "captador": "Paulo Cesar Barbosa Azevedo"
+ },
+ {
+  "id": "AP0044",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Antônio Gil Vellozo, nº 1598",
+  "cond": "Edificio Saint Patrick",
+  "bairro": "Praia da Costa",
+  "bairroRaw": "Praia da Costa",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 4500000,
+  "dorm": 3,
+  "suites": 2,
+  "vagas": 3,
+  "area": 200,
+  "rcond": 0,
+  "iptu": 0,
+  "fotos": 17,
+  "captador": "Matheus Zamborlini"
+ },
+ {
+  "id": "CA0004",
+  "tipo": "Casa",
+  "finalidade": "Residencial",
+  "endereco": "Rua Dom Jorge de Menezes, nº 0",
+  "cond": "",
+  "bairro": "Prainha",
+  "bairroRaw": "Prainha",
+  "regiao": "Itapoã",
+  "cidade": "Vila Velha",
+  "valor": 2100000,
+  "dorm": 10,
+  "suites": 1,
+  "vagas": 4,
+  "area": 450,
+  "rcond": 0,
+  "iptu": 0,
+  "fotos": 13,
+  "captador": "Marcelo Siqueira Albano da Costa"
+ },
+ {
+  "id": "AP0041",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Ibitirama, nº 75",
+  "cond": "Condomínio do Edifício Residencial Octávio Carrilh",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 1680000,
+  "dorm": 4,
+  "suites": 1,
+  "vagas": 3,
+  "area": 162,
+  "rcond": 950,
+  "iptu": 1300,
+  "fotos": 20,
+  "captador": "Marcelo Siqueira Albano da Costa"
+ },
+ {
+  "id": "LO0002",
+  "tipo": "Loja",
+  "finalidade": "Comercial",
+  "endereco": "Avenida Romero Botelho, nº 335",
+  "cond": "Rio Das Pedras",
+  "bairro": "Praia da Costa",
+  "bairroRaw": "Praia da Costa",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 0,
+  "dorm": 0,
+  "suites": 0,
+  "vagas": 0,
+  "area": 221,
+  "rcond": 0,
+  "iptu": 0,
+  "fotos": 7,
+  "captador": "Daniela Rocha Lima"
+ },
+ {
+  "id": "CA0003",
+  "tipo": "Casa",
+  "finalidade": "Residencial",
+  "endereco": "Rodovia Do Sol, nº 0",
+  "cond": "Condomínio Jardins Veneza",
+  "bairro": "Interlagos",
+  "bairroRaw": "Interlagos",
+  "regiao": "Interlagos",
+  "cidade": "Vila Velha",
+  "valor": 3000000,
+  "dorm": 4,
+  "suites": 4,
+  "vagas": 4,
+  "area": 378,
+  "rcond": 650,
+  "iptu": 0,
+  "fotos": 6,
+  "captador": "Marcelo Siqueira Albano da Costa"
+ },
+ {
+  "id": "AP0039",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua São Paulo, nº 2050",
+  "cond": "Veleiros",
+  "bairro": "Praia da Costa",
+  "bairroRaw": "Praia da Costa",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 1300000,
+  "dorm": 3,
+  "suites": 1,
+  "vagas": 2,
+  "area": 101,
+  "rcond": 0,
+  "iptu": 1500,
+  "fotos": 14,
+  "captador": "Daniele Goulart Martins"
+ },
+ {
+  "id": "AP0037",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Darly Santos, nº 5500",
+  "cond": "Costa Mare Residence Club",
+  "bairro": "Darly Santos",
+  "bairroRaw": "Darly Santos",
+  "regiao": "Darly Santos",
+  "cidade": "Vila Velha",
+  "valor": 2900000,
+  "dorm": 4,
+  "suites": 4,
+  "vagas": 4,
+  "area": 188,
+  "rcond": 1600,
+  "iptu": 0,
+  "fotos": 25,
+  "captador": "Paulo Cesar Barbosa Azevedo"
+ },
+ {
+  "id": "AP0032",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Humberto Serrano, nº 178",
+  "cond": "Ipanema",
+  "bairro": "Praia da Costa",
+  "bairroRaw": "Praia da Costa",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 720000,
+  "dorm": 2,
+  "suites": 1,
+  "vagas": 1,
+  "area": 100,
+  "rcond": 530,
+  "iptu": 0,
+  "fotos": 10,
+  "captador": "Daniela Rocha Lima"
+ },
+ {
+  "id": "AP0030",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Afonso Pena, nº 635",
+  "cond": "Catamarâ",
+  "bairro": "Praia da Costa",
+  "bairroRaw": "Praia da Costa",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 1220000,
+  "dorm": 2,
+  "suites": 1,
+  "vagas": 2,
+  "area": 78,
+  "rcond": 600,
+  "iptu": 0,
+  "fotos": 8,
+  "captador": "Luciana Paúra de Siqueira da Costa"
+ },
+ {
+  "id": "AP0023",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Luiz Fernandes Reis, nº 500",
+  "cond": "Aquarius",
+  "bairro": "Praia da Costa",
+  "bairroRaw": "Praia da Costa",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 1650000,
+  "dorm": 4,
+  "suites": 2,
+  "vagas": 2,
+  "area": 230,
+  "rcond": 0,
+  "iptu": 0,
+  "fotos": 12,
+  "captador": "Daniela Rocha Lima"
+ },
+ {
+  "id": "TE0001",
+  "tipo": "Terreno",
+  "finalidade": "Residencial",
+  "endereco": "Rua Girassol, nº 0",
+  "cond": "Condomínio Riviera Park Residence",
+  "bairro": "Santa Paula II",
+  "bairroRaw": "Santa Paula II",
+  "regiao": "Santa Paula II",
+  "cidade": "Vila Velha",
+  "valor": 750000,
+  "dorm": 0,
+  "suites": 0,
+  "vagas": 0,
+  "area": 615,
+  "rcond": 1300,
+  "iptu": 1400,
+  "fotos": 12,
+  "captador": "Marcelo Siqueira Albano da Costa"
+ },
+ {
+  "id": "CA0002",
+  "tipo": "Casa",
+  "finalidade": "Residencial",
+  "endereco": "Alameda Pedro Bravim, nº 0",
+  "cond": "",
+  "bairro": "Interlagos",
+  "bairroRaw": "Interlagos",
+  "regiao": "Interlagos",
+  "cidade": "Vila Velha",
+  "valor": 945000,
+  "dorm": 3,
+  "suites": 1,
+  "vagas": 2,
+  "area": 260,
+  "rcond": 0,
+  "iptu": 0,
+  "fotos": 22,
+  "captador": "Marcelo Siqueira Albano da Costa"
+ },
+ {
+  "id": "AD0001",
+  "tipo": "Apartamento Duplex",
+  "finalidade": "Residencial",
+  "endereco": "Rua Goiás, nº 131",
+  "cond": "Antonio Bazzarella",
+  "bairro": "Praia de Itapoã",
+  "bairroRaw": "Praia de Itapoã",
+  "regiao": "Itapoã",
+  "cidade": "Vila Velha",
+  "valor": 3700000,
+  "dorm": 5,
+  "suites": 2,
+  "vagas": 2,
+  "area": 474,
+  "rcond": 0,
+  "iptu": 3309,
+  "fotos": 11,
+  "captador": "Bruno Severnini Penna Rocha"
+ },
+ {
+  "id": "AP0018",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Brasília, nº 140",
+  "cond": "Edificio Porto de Itapua",
+  "bairro": "Itapuã",
+  "bairroRaw": "Itapuã",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 1200000,
+  "dorm": 3,
+  "suites": 1,
+  "vagas": 2,
+  "area": 110,
+  "rcond": 0,
+  "iptu": 0,
+  "fotos": 10,
+  "captador": "Matheus Zamborlini"
+ },
+ {
+  "id": "AP0017",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Rua Brasília, nº 140",
+  "cond": "Edificio Porto de Itapua",
+  "bairro": "Itapuã",
+  "bairroRaw": "Itapuã",
+  "regiao": "Praia da Costa",
+  "cidade": "Vila Velha",
+  "valor": 1150000,
+  "dorm": 3,
+  "suites": 1,
+  "vagas": 2,
+  "area": 110,
+  "rcond": 0,
+  "iptu": 0,
+  "fotos": 10,
+  "captador": "Matheus Zamborlini"
+ },
+ {
+  "id": "AP0015",
+  "tipo": "Apartamento",
+  "finalidade": "Residencial",
+  "endereco": "Avenida Estudante José Júlio de Souza, nº 2670",
+  "cond": "Edificio Splendore",
+  "bairro": "Praia de Itaparica",
+  "bairroRaw": "Praia de Itaparica",
+  "regiao": "Itaparica",
+  "cidade": "Vila Velha",
+  "valor": 3400000,
+  "dorm": 4,
+  "suites": 4,
+  "vagas": 4,
+  "area": 230,
+  "rcond": 1380,
+  "iptu": 0,
+  "fotos": 25,
+  "captador": "Matheus Zamborlini"
+ }
+];
+const SNAPSHOT = "23/06/2026";
+
+/* ---------- helpers ---------- */
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const brl = n => n>0 ? n.toLocaleString('pt-BR',{style:'currency',currency:'BRL',maximumFractionDigits:0}) : '—';
+const brlShort = n => { if(!n) return '—'; if(n>=1e6) return 'R$ '+(n/1e6).toFixed(n%1e6?1:0).replace('.',',')+'M'; if(n>=1e3) return 'R$ '+Math.round(n/1e3)+'k'; return brl(n); };
+const tipoIcon = t => ({'Apartamento':'🏢','Apartamento Duplex':'🏢','Apartamento Triplex':'🏢','Cobertura':'🏙️','Casa':'🏡','Terreno':'🌳','Sala':'🏬','Loja':'🛍️','Ponto':'🛍️','Flat':'🛎️','Hotel':'🏨','Corporativa':'🏢'}[t] || '🏠');
+const VALOR_MIN_OK = 10000; // abaixo disso o preco de venda e considerado inconsistente
+const usable = im => im.valor >= VALOR_MIN_OK;
+
+/* pesos do score */
+const W = {orc:30, bairro:20, dorm:20, area:15, suites:8, vagas:7};
+
+/* ---------- state ---------- */
+let state = { tipos:new Set(), bairros:new Set() };
+let results = [];        // {im, score, parts, perfeito}
+let deck = [];           // fila de cards (copia de results)
+let history = [];        // p/ desfazer
+let favorites = [];      // {im, score}
+let rkSort = {key:'score', dir:-1};
+let historyBuscas = [];  // buscas arquivadas: {id,cliente,when,summary,items:[{im,score}]}
+let lastDemand = null;   // snapshot da última demanda buscada
+
+/* ---------- persist (opcional, seguro) ---------- */
+const store = {
+  save(){ try{ localStorage.setItem('tinderimob_fav', JSON.stringify(favorites.map(f=>f.im.id))); }catch(e){} },
+  loadFav(){ try{ return JSON.parse(localStorage.getItem('tinderimob_fav')||'[]'); }catch(e){ return []; } },
+  saveHist(){ try{ localStorage.setItem('tinderimob_hist', JSON.stringify(historyBuscas.map(h=>({id:h.id,cliente:h.cliente,when:h.when,summary:h.summary,items:h.items.map(it=>({id:it.im.id,score:it.score}))})))); }catch(e){} },
+  loadHist(){ try{ return (JSON.parse(localStorage.getItem('tinderimob_hist')||'[]')).map(h=>({id:h.id,cliente:h.cliente,when:h.when,summary:h.summary,items:(h.items||[]).map(it=>({im:IMOVEIS.find(x=>x.id===it.id),score:it.score})).filter(it=>it.im)})); }catch(e){ return []; } }
+};
+
+/* ---------- init ui ---------- */
+function init(){
+  // header stats
+  const ativos = IMOVEIS.length;
+  const vgv = IMOVEIS.reduce((s,x)=>s+(usable(x)?x.valor:0),0);
+  const comValor = IMOVEIS.filter(usable);
+  const ticket = comValor.length ? vgv/comValor.length : 0;
+  const nbairros = new Set(IMOVEIS.map(x=>x.bairro)).size;
+  $('#hstats').innerHTML = [
+    ['Imóveis ativos', ativos],
+    ['VGV da carteira', brlShort(vgv)],
+    ['Ticket médio', brlShort(ticket)],
+    ['Bairros', nbairros]
+  ].map(([s,b])=>`<div class="hstat"><b>${b}</b><span>${s}</span></div>`).join('');
+  $('#foot-total').textContent = ativos;
+  $('#foot-date').textContent = SNAPSHOT;
+
+  // finalidade
+  const fins = [...new Set(IMOVEIS.map(x=>x.finalidade).filter(Boolean))].sort();
+  $('#finalidade').innerHTML = '<option value="">Todas</option>'+fins.map(f=>`<option>${f}</option>`).join('');
+
+  // tipos (chips, por contagem)
+  const tc = countBy(IMOVEIS,'tipo');
+  $('#tipos').innerHTML = tc.map(([t,c])=>`<span class="chip" data-grp="tipos" data-v="${esc(t)}">${tipoIcon(t)} ${esc(t)}<span class="ct">${c}</span></span>`).join('');
+
+  // bairros (chips, por contagem)
+  const bc = countBy(IMOVEIS,'bairro');
+  $('#bairros').innerHTML = bc.map(([b,c])=>`<span class="chip" data-grp="bairros" data-v="${esc(b)}">${esc(b)}<span class="ct">${c}</span></span>`).join('');
+
+  // listeners
+  $$('.chip').forEach(ch=>ch.addEventListener('click',()=>toggleChip(ch)));
+  $$('.stepper button').forEach(b=>b.addEventListener('click',()=>step(b.dataset.step, +b.dataset.d)));
+  $('#areaR').addEventListener('input',e=>{ $('#areaV').textContent = (+e.target.value===0)?'Indiferente':(e.target.value+' m²'); });
+  $$('.tab').forEach(t=>t.addEventListener('click',()=>switchView(t.dataset.view)));
+  $('#buscar').addEventListener('click',buscar);
+  $('#limpar').addEventListener('click',limpar);
+  $('#reload').addEventListener('click',()=>switchView('cards'));
+  $('#btnNo').addEventListener('click',()=>decide(false));
+  $('#btnYes').addEventListener('click',()=>decide(true));
+  $('#btnBack').addEventListener('click',undo);
+  $('#exportCsv').addEventListener('click',exportCsv);
+  $('#printFav').addEventListener('click',()=>{switchView('favoritos');setTimeout(()=>window.print(),120);});
+  $('#archiveFav').addEventListener('click',()=>{ if(archiveFavorites()){renderFav();toast('Busca arquivada no histórico.');} else toast('Nenhum favorito para arquivar.'); });
+  $('#clearFav').addEventListener('click',()=>{ if(!favorites.length){toast('Não há favoritos para descartar.');return;} if(confirm('Descartar os favoritos atuais SEM salvar no histórico?')){favorites=[];store.save();renderFav();updateFavCount();renderRanking();} });
+  $$('#rk-table th[data-sort]').forEach(th=>th.addEventListener('click',()=>sortRk(th.dataset.sort)));
+  document.addEventListener('keydown',e=>{ if($('#view-cards').classList.contains('on') && deck.length){ if(e.key==='ArrowRight')decide(true); if(e.key==='ArrowLeft')decide(false); } });
+
+  // restaura favoritos salvos
+  const savedIds = store.loadFav();
+  if(savedIds.length){ favorites = savedIds.map(id=>IMOVEIS.find(x=>x.id===id)).filter(Boolean).map(im=>({im,score:null})); updateFavCount(); }
+  // restaura histórico de buscas
+  historyBuscas = store.loadHist();
+  updateHistCount(); renderHistory();
+}
+
+function countBy(arr,key){ const m={}; arr.forEach(x=>{const k=x[key]||'—'; m[k]=(m[k]||0)+1;}); return Object.entries(m).sort((a,b)=>b[1]-a[1]); }
+function esc(s){ return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+
+function toggleChip(ch){ const g=ch.dataset.grp, v=ch.dataset.v; ch.classList.toggle('on'); const set=state[g]; set.has(v)?set.delete(v):set.add(v); }
+function step(id,d){ const el=$('#'+id); el.value=Math.max(0,(+el.value||0)+d); }
+
+/* ---------- regioes selecionadas (p/ credito parcial de bairro) ---------- */
+function selectedRegions(){ const r=new Set(); IMOVEIS.forEach(x=>{ if(state.bairros.has(x.bairro)) r.add(x.regiao); }); return r; }
+
+/* ====================================================================
+   ALGORITMO DE MATCH — score inteligente (0–100)
+   ==================================================================== */
+function scoreImovel(im, d){
+  const parts = {};
+
+  // ORÇAMENTO (teto) — peso W.orc
+  if(!d.orcMax){ parts.orc = {p:W.orc, full:true, txt:'sem teto', mk:'•'}; }
+  else if(!usable(im)){ parts.orc = {p:W.orc*0.6, full:false, txt:'a confirmar', mk:'≈'}; }
+  else {
+    const r = im.valor / d.orcMax;
+    let p;
+    if(r<=1) p=W.orc;
+    else if(r<=1.10) p=W.orc*(1-(r-1)/0.10*0.5);   // até +10% perde metade
+    else if(r<=1.25) p=W.orc*0.5*(1-(r-1.10)/0.15); // +10..25% cai a zero
+    else p=0;
+    // respeita orçamento mínimo se houver
+    if(d.orcMin && im.valor < d.orcMin) p=Math.min(p, W.orc*0.4);
+    parts.orc = {p, full:r<=1 && (!d.orcMin||im.valor>=d.orcMin), txt:brlShort(im.valor), mk: r<=1?'✓':(p>0?'≈':'✗')};
+  }
+
+  // BAIRRO (preferência) — peso W.bairro
+  if(d.bairros.size===0){ parts.bairro={p:W.bairro, full:true, txt:im.bairro, mk:'•'}; }
+  else if(d.bairros.has(im.bairro)){ parts.bairro={p:W.bairro, full:true, txt:im.bairro, mk:'✓'}; }
+  else if(d.regions.has(im.regiao)){ parts.bairro={p:W.bairro*0.5, full:false, txt:im.bairro+' (região)', mk:'≈'}; }
+  else { parts.bairro={p:0, full:false, txt:im.bairro, mk:'✗'}; }
+
+  // helper p/ mínimos (dorm, suites, vagas)
+  const minMatch = (have, need, peso) => {
+    if(!need) return {p:peso, full:true, mk:'•'};
+    if(have>=need) return {p:peso, full:true, mk:'✓'};
+    if(have===need-1) return {p:peso*0.5, full:false, mk:'≈'};
+    return {p:0, full:false, mk:'✗'};
+  };
+  parts.dorm   = {...minMatch(im.dorm,   d.dorm,   W.dorm),   txt:im.dorm+' dorm'};
+  parts.suites = {...minMatch(im.suites, d.suites, W.suites), txt:im.suites+' suíte'};
+  parts.vagas  = {...minMatch(im.vagas,  d.vagas,  W.vagas),  txt:im.vagas+' vaga'};
+
+  // ÁREA (mínimo, com tolerância) — peso W.area
+  if(!d.area){ parts.area={p:W.area, full:true, txt:im.area+' m²', mk:'•'}; }
+  else {
+    const r = im.area / d.area; let p, mk;
+    if(r>=1){ p=W.area; mk='✓'; }
+    else if(r>=0.9){ p=W.area*(0.5+ (r-0.9)/0.1*0.5); mk='≈'; }   // 90-100% -> 0.5..1
+    else if(r>=0.8){ p=W.area*0.5*((r-0.8)/0.1); mk='≈'; }        // 80-90% -> 0..0.5
+    else { p=0; mk='✗'; }
+    parts.area={p, full:r>=1, txt:im.area+' m²', mk};
+  }
+
+  const total = Object.values(parts).reduce((s,x)=>s+x.p,0);
+  const maxTotal = Object.values(W).reduce((a,b)=>a+b,0);
+  const score = Math.round(total/maxTotal*100);
+  const perfeito = parts.orc.full && parts.bairro.full && parts.dorm.full && parts.suites.full && parts.vagas.full && parts.area.full;
+  return {score, parts, perfeito};
+}
+
+function readDemand(){
+  return {
+    cliente: $('#cliente').value.trim(),
+    finalidade: $('#finalidade').value,
+    tipos: new Set(state.tipos),
+    bairros: new Set(state.bairros),
+    regions: selectedRegions(),
+    area: +$('#areaR').value || 0,
+    dorm: +$('#dorm').value || 0,
+    suites: +$('#suites').value || 0,
+    vagas: +$('#vagas').value || 0,
+    orcMax: +$('#orcamento').value || 0,
+    orcMin: +$('#orcamentoMin').value || 0,
+    hardOrc: $('#hardOrc').checked,
+    hardBairro: $('#hardBairro').checked,
+    hardTipo: $('#hardTipo').checked,
+    hardSpecs: $('#hardSpecs').checked,
+  };
+}
+
+function buscar(){
+  const d = readDemand();
+  lastDemand = d;
+  let pool = IMOVEIS.slice();
+  // pré-filtros rígidos
+  if(d.finalidade) pool = pool.filter(x=>x.finalidade===d.finalidade);
+  if(d.tipos.size && d.hardTipo) pool = pool.filter(x=>d.tipos.has(x.tipo));
+  if(d.hardBairro && d.bairros.size) pool = pool.filter(x=>d.bairros.has(x.bairro));
+  if(d.hardOrc && d.orcMax) pool = pool.filter(x=>usable(x) && x.valor<=d.orcMax && (!d.orcMin||x.valor>=d.orcMin));
+  if(d.hardSpecs) pool = pool.filter(x=>x.dorm>=d.dorm && x.suites>=d.suites && x.vagas>=d.vagas && (!d.area||x.area>=d.area));
+  // tipo como preferência suave quando não-rígido: não filtra, mas damos um leve bônus
+  results = pool.map(im=>{
+    const r = scoreImovel(im,d);
+    // bônus leve por tipo preferido (não-rígido)
+    if(d.tipos.size && !d.hardTipo && d.tipos.has(im.tipo)) r.score = Math.min(100, r.score+3);
+    return {im, ...r};
+  }).sort((a,b)=> b.score-a.score || (b.perfeito-a.perfeito) || a.im.valor-b.im.valor);
+
+  deck = results.slice();
+  history = [];
+  $('#cards-empty').style.display = results.length? 'none':'block';
+  $('#stagewrap').style.display = results.length? 'flex':'none';
+  if(!results.length){ $('#cards-empty').innerHTML='<div class="big">🤷</div><p>Nenhum imóvel passou pelos <b>filtros rígidos</b>. Afrouxe as exigências e tente de novo.</p>'; }
+  renderStage(); renderRanking(); switchView('cards');
+}
+
+function limpar(){
+  // arquiva a busca atual no histórico (se houver favoritos) antes de limpar os filtros
+  const arquivou = archiveFavorites();
+  state.tipos.clear(); state.bairros.clear();
+  $$('.chip.on').forEach(c=>c.classList.remove('on'));
+  $('#cliente').value=''; $('#finalidade').value='';
+  $('#orcamento').value=''; $('#orcamentoMin').value='';
+  ['dorm','suites','vagas'].forEach(id=>$('#'+id).value=0);
+  $('#areaR').value=0; $('#areaV').textContent='Indiferente';
+  ['hardOrc','hardBairro','hardTipo','hardSpecs'].forEach(id=>$('#'+id).checked=false);
+  results=[];deck=[];lastDemand=null;$('#cards-empty').style.display='block';$('#stagewrap').style.display='none';
+  $('#cards-empty').innerHTML='<div class="big">🏠</div><p><b>Cadastre a demanda</b> e clique em <b>Encontrar matches</b> para começar a deslizar pelos imóveis.</p>';
+  renderRanking(); renderFav();
+  if(arquivou) toast('Busca arquivada no histórico (aba ⭐ Favoritos).');
+}
+
+/* ---------- views ---------- */
+function switchView(v){ $$('.tab').forEach(t=>t.classList.toggle('on',t.dataset.view===v)); $$('.view').forEach(x=>x.classList.remove('on')); $('#view-'+v).classList.add('on'); if(v==='favoritos')renderFav(); }
+
+/* ---------- CARD STAGE ---------- */
+function scoreColor(s){ return s>=80?'var(--green)':s>=60?'var(--amber)':s>=40?'var(--blue)':'var(--muted)'; }
+function cardHTML(r){
+  const im=r.im;
+  const specs=[['🛏',im.dorm,'Dorm'],['🚿',im.suites,'Suítes'],['🚗',im.vagas,'Vagas'],['📐',im.area,'m²']];
+  const order=[['Orçamento','orc'],['Bairro','bairro'],['Dormitórios','dorm'],['Área','area'],['Suítes','suites'],['Vagas','vagas']];
+  const rows=order.map(([nm,k])=>{const pt=r.parts[k];const pct=Math.round(pt.p/W[k]*100);
+    return `<div class="brow"><span class="nm">${nm}</span><span class="bar"><i style="width:${pct}%"></i></span><span class="vl">${esc(pt.txt)}</span><span class="mk">${pt.mk}</span></div>`;}).join('');
+  const conf = usable(im)?'':'<span class="pricenote"> · a confirmar</span>';
+  return `
+  <div class="hero" style="background:${r.perfeito?'linear-gradient(135deg,#16a34a,#0ea5a0)':'var(--grad-soft)'}">
+    <span class="ico">${tipoIcon(im.tipo)}</span>
+    <span class="tag">${esc(im.tipo)}${r.perfeito?' · match perfeito 🎯':''}</span>
+    <div>
+      <div class="price">${brl(im.valor)}${conf}</div>
+      <div class="ref">Ref. ${esc(im.id)} · ${im.fotos} fotos</div>
+    </div>
+  </div>
+  <div class="scorebadge" style="border-color:${scoreColor(r.score)}"><b>${r.score}%</b><span>match</span></div>
+  <div class="body">
+    <div class="loc">📍 ${esc(im.bairro)}, ${esc(im.cidade)}</div>
+    <div class="addr">${esc(im.cond?im.cond+' · ':'')}${esc(im.endereco||'')}</div>
+    <div class="specs">${specs.map(([i,v,l])=>`<div class="spec"><b>${v}</b><span>${i} ${l}</span></div>`).join('')}</div>
+    <div class="breakdown"><div class="bt">Por que combina</div>${rows}</div>
+    <div class="cap">👤 Captador: ${esc(im.captador||'—')}${im.rcond?` · Cond. ${brl(im.rcond)}`:''}${im.iptu?` · IPTU ${brl(im.iptu)}`:''}</div>
+  </div>`;
+}
+function renderStage(){
+  const stage=$('#stage'); stage.innerHTML='';
+  const top3=deck.slice(0,3).reverse();
+  top3.forEach((r,i)=>{
+    const el=document.createElement('div'); el.className='swipe'; el.innerHTML=cardHTML(r);
+    const depth=top3.length-1-i;
+    el.style.transform=`translateY(${depth*10}px) scale(${1-depth*0.04})`;
+    el.style.zIndex=10+i;
+    el.innerHTML+='<div class="stamp like">MATCH</div><div class="stamp nope">PASS</div>';
+    if(i===top3.length-1) makeDraggable(el);
+    stage.appendChild(el);
+  });
+  const done=results.length-deck.length;
+  $('#counter').textContent = deck.length? `Imóvel ${done+1} de ${results.length} · ${favorites.length} favoritado(s)` : '';
+  if(!deck.length){ stage.innerHTML=`<div class="swipe" style="align-items:center;justify-content:center;text-align:center;padding:30px"><div><div style="font-size:48px">🎉</div><p><b>Você viu todos os matches!</b></p><p style="color:var(--muted);font-size:13px">${favorites.length} imóvel(is) na sua shortlist. Veja em <b>⭐ Favoritos</b>.</p><button class="linkbtn" onclick="switchView('favoritos')">Ver favoritos</button></div></div>`; $('#counter').textContent=''; }
+}
+function decide(like){
+  if(!deck.length) return;
+  const r=deck[0];
+  const card=$('#stage').querySelector('.swipe:last-child');
+  if(card){ const s=card.querySelector(like?'.stamp.like':'.stamp.nope'); if(s)s.style.opacity=1;
+    card.style.transition='transform .3s, opacity .3s';
+    card.style.transform=`translate(${like?600:-600}px, -40px) rotate(${like?22:-22}deg)`; card.style.opacity=0; }
+  history.push({r, liked:like});
+  if(like && !favorites.find(f=>f.im.id===r.im.id)){ favorites.push({im:r.im, score:r.score}); store.save(); updateFavCount(); }
+  deck.shift();
+  setTimeout(renderStage,200);
+}
+function undo(){
+  if(!history.length) return;
+  const last=history.pop();
+  deck.unshift(last.r);
+  if(last.liked){ favorites=favorites.filter(f=>f.im.id!==last.r.im.id); store.save(); updateFavCount(); }
+  renderStage();
+}
+function makeDraggable(el){
+  let sx=0,sy=0,dx=0,dy=0,drag=false;
+  const like=el.querySelector('.stamp.like'), nope=el.querySelector('.stamp.nope');
+  const down=e=>{drag=true;sx=(e.touches?e.touches[0].clientX:e.clientX);sy=(e.touches?e.touches[0].clientY:e.clientY);el.style.transition='none';};
+  const move=e=>{ if(!drag)return; const cx=(e.touches?e.touches[0].clientX:e.clientX),cy=(e.touches?e.touches[0].clientY:e.clientY);
+    dx=cx-sx;dy=cy-sy; el.style.transform=`translate(${dx}px,${dy}px) rotate(${dx/18}deg)`;
+    const k=Math.min(Math.abs(dx)/120,1); if(dx>0){like.style.opacity=k;nope.style.opacity=0;}else{nope.style.opacity=k;like.style.opacity=0;} };
+  const up=()=>{ if(!drag)return; drag=false; el.style.transition='transform .3s';
+    if(Math.abs(dx)>110){ decide(dx>0); } else { el.style.transform=''; like.style.opacity=0;nope.style.opacity=0; } dx=0;dy=0; };
+  el.addEventListener('mousedown',down); window.addEventListener('mousemove',move); window.addEventListener('mouseup',up);
+  el.addEventListener('touchstart',down,{passive:true}); el.addEventListener('touchmove',move,{passive:true}); el.addEventListener('touchend',up);
+}
+
+/* ---------- RANKING ---------- */
+function pillClass(s){ return s>=80?'perfeito':s>=60?'alto':s>=40?'medio':'baixo'; }
+function pillTxt(r){ return r.perfeito?'Perfeito':r.score>=80?'Excelente':r.score>=60?'Bom':r.score>=40?'Parcial':'Fraco'; }
+function renderRanking(){
+  const body=$('#rk-body'); const has=results.length;
+  $('#rk-empty').style.display=has?'none':'block'; $('#rk-table').style.display=has?'table':'none';
+  $('#rk-count').textContent = has? `${results.length} imóveis avaliados` : '—';
+  if(!has){ body.innerHTML=''; return; }
+  const sorted=results.slice().sort((a,b)=>{
+    const k=rkSort.key; let av,bv;
+    if(k==='score'){av=a.score;bv=b.score;} else if(k==='tipo'){av=a.im.tipo;bv=b.im.tipo;}
+    else {av=a.im[k];bv=b.im[k];}
+    if(typeof av==='string') return rkSort.dir*av.localeCompare(bv);
+    return rkSort.dir*(av-bv);
+  });
+  body.innerHTML=sorted.map(r=>{const im=r.im; const fav=favorites.find(f=>f.im.id===im.id);
+    return `<tr>
+      <td><div class="scorecell"><span class="scorebar"><i style="width:${r.score}%"></i></span><b class="tnum">${r.score}</b></div><span class="pill ${pillClass(r.score)}">${pillTxt(r)}</span></td>
+      <td class="miniref">${esc(im.id)}</td>
+      <td>${tipoIcon(im.tipo)} ${esc(im.tipo)}<div class="minisub">📍 ${esc(im.bairro)}</div></td>
+      <td class="tnum">${brl(im.valor)}${usable(im)?'':'<div class="minisub" style="color:var(--amber)">a confirmar</div>'}</td>
+      <td class="tnum">${im.area} m²</td>
+      <td class="tnum">${im.dorm}</td><td class="tnum">${im.suites}</td><td class="tnum">${im.vagas}</td>
+      <td><button class="heart ${fav?'on':''}" data-id="${esc(im.id)}" title="Favoritar">❤</button></td>
+    </tr>`;}).join('');
+  body.querySelectorAll('.heart').forEach(h=>h.addEventListener('click',()=>{
+    const im=IMOVEIS.find(x=>x.id===h.dataset.id); const r=results.find(x=>x.im.id===h.dataset.id);
+    const idx=favorites.findIndex(f=>f.im.id===im.id);
+    if(idx>=0)favorites.splice(idx,1); else favorites.push({im,score:r?r.score:null});
+    store.save(); h.classList.toggle('on'); updateFavCount();
+  }));
+}
+function sortRk(k){ if(rkSort.key===k)rkSort.dir*=-1; else {rkSort.key=k;rkSort.dir=(k==='score')?-1:1;} renderRanking(); }
+
+/* ---------- FAVORITOS + HISTÓRICO ---------- */
+function updateFavCount(){ $('#favCount').textContent=favorites.length; }
+function updateHistCount(){ const el=$('#histCount'); if(el) el.textContent=historyBuscas.length; }
+
+function favCardHTML(f, removable){
+  const im=f.im;
+  return `<div class="favcard">
+    ${f.score!=null?`<span class="fscore">${f.score}%</span>`:''}
+    ${removable?`<button class="x" data-id="${esc(im.id)}">✕</button>`:''}
+    <div class="ft">${tipoIcon(im.tipo)} ${esc(im.tipo)} · ${esc(im.id)}</div>
+    <div class="fs">📍 ${esc(im.bairro)}, ${esc(im.cidade)}${im.cond?' · '+esc(im.cond):''}</div>
+    <div class="fp">${brl(im.valor)}${usable(im)?'':' <span style="font-size:11px;color:var(--amber)">(a confirmar)</span>'}</div>
+    <div class="fspecs">🛏 ${im.dorm} dorm · 🚿 ${im.suites} suíte · 🚗 ${im.vagas} vaga · 📐 ${im.area} m²</div>
+    <div class="fspecs" style="color:var(--muted)">👤 ${esc(im.captador||'—')}</div>
+  </div>`;
+}
+
+function renderFav(){
+  const grid=$('#fav-grid'); const has=favorites.length;
+  $('#fav-empty').style.display=has?'none':'block';
+  const cli=$('#cliente').value.trim();
+  $('#fav-title').textContent = cli? `Favoritos — ${cli}` : 'Favoritos da busca atual';
+  $('#fav-sub').textContent = has? `${favorites.length} imóvel(is) · valor total ${brlShort(favorites.reduce((s,f)=>s+(usable(f.im)?f.im.valor:0),0))}` : '';
+  grid.innerHTML=favorites.map(f=>favCardHTML(f,true)).join('');
+  grid.querySelectorAll('.x').forEach(b=>b.addEventListener('click',()=>{favorites=favorites.filter(f=>f.im.id!==b.dataset.id);store.save();renderFav();updateFavCount();renderRanking();}));
+  renderHistory();
+}
+
+/* resumo legível da demanda (vai no cabeçalho do card de histórico) */
+function demandSummary(d){
+  if(!d) return 'Sem filtros';
+  const p=[];
+  if(d.finalidade)p.push(d.finalidade);
+  if(d.tipos&&d.tipos.size)p.push([...d.tipos].join('/'));
+  if(d.dorm)p.push(d.dorm+'+ dorm');
+  if(d.suites)p.push(d.suites+'+ suíte');
+  if(d.vagas)p.push(d.vagas+'+ vaga');
+  if(d.area)p.push('≥'+d.area+' m²');
+  if(d.bairros&&d.bairros.size)p.push([...d.bairros].join(', '));
+  if(d.orcMin)p.push('de '+brlShort(d.orcMin));
+  if(d.orcMax)p.push('até '+brlShort(d.orcMax));
+  return p.length?p.join(' · '):'Sem filtros';
+}
+
+/* arquiva os favoritos atuais como uma entrada de histórico e esvazia a lista */
+function archiveFavorites(){
+  if(!favorites.length) return false;
+  const d = lastDemand || readDemand();
+  historyBuscas.unshift({
+    id:'h'+Date.now(),
+    cliente:(d&&d.cliente)? d.cliente : ($('#cliente').value.trim()||'Busca sem nome'),
+    when:new Date().toISOString(),
+    summary:demandSummary(d),
+    items:favorites.slice()
+  });
+  favorites=[];
+  store.save(); store.saveHist();
+  updateFavCount(); updateHistCount();
+  return true;
+}
+
+function renderHistory(){
+  const sec=$('#hist-sec'), list=$('#hist-list'); if(!sec||!list) return;
+  updateHistCount();
+  sec.style.display = historyBuscas.length? 'block':'none';
+  list.innerHTML = historyBuscas.map(h=>{
+    const total=h.items.reduce((s,f)=>s+(usable(f.im)?f.im.valor:0),0);
+    const w=new Date(h.when);
+    const wstr=w.toLocaleDateString('pt-BR')+' '+w.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
+    const cards=h.items.map(f=>favCardHTML(f,false)).join('');
+    return `<div class="histcard" data-id="${h.id}">
+      <div class="hh">
+        <span class="hchev">▶</span>
+        <div class="hmeta"><div class="hcli">${esc(h.cliente)}</div><div class="hsum">${esc(h.summary)}</div></div>
+        <span class="hbadge">${h.items.length} imóv. · ${brlShort(total)}</span>
+        <span class="htime">${wstr}</span>
+        <div class="hacts no-print">
+          <button data-act="restore" title="Restaurar para os favoritos atuais">↩</button>
+          <button data-act="csv" title="Exportar CSV desta busca">⬇</button>
+          <button data-act="del" title="Excluir do histórico">🗑</button>
+        </div>
+      </div>
+      <div class="hbody"><div class="fav-grid">${cards}</div></div>
+    </div>`;
+  }).join('');
+  list.querySelectorAll('.histcard').forEach(card=>{
+    const id=card.dataset.id;
+    card.querySelector('.hh').addEventListener('click',e=>{ if(e.target.closest('.hacts'))return;
+      card.classList.toggle('open'); card.querySelector('.hchev').textContent = card.classList.contains('open')?'▼':'▶'; });
+    card.querySelector('[data-act="restore"]').addEventListener('click',()=>restoreHist(id));
+    card.querySelector('[data-act="csv"]').addEventListener('click',()=>{const h=historyBuscas.find(x=>x.id===id); if(h)csvFor(h.items,h.cliente);});
+    card.querySelector('[data-act="del"]').addEventListener('click',()=>delHist(id));
+  });
+}
+
+function restoreHist(id){
+  const h=historyBuscas.find(x=>x.id===id); if(!h)return;
+  let n=0; h.items.forEach(it=>{ if(!favorites.find(f=>f.im.id===it.im.id)){favorites.push({im:it.im,score:it.score});n++;} });
+  store.save(); updateFavCount(); renderFav(); renderRanking();
+  toast(n? `${n} imóvel(is) restaurado(s) para os favoritos atuais.` : 'Esses imóveis já estão nos favoritos atuais.');
+}
+function delHist(id){
+  const h=historyBuscas.find(x=>x.id===id); if(!h)return;
+  if(!confirm(`Excluir do histórico a busca "${h.cliente}" (${h.items.length} imóveis)?`)) return;
+  historyBuscas=historyBuscas.filter(x=>x.id!==id);
+  store.saveHist(); updateHistCount(); renderHistory();
+}
+
+function csvFor(items,label){
+  if(!items||!items.length){ toast('Nada para exportar.'); return; }
+  const head=['Referencia','Tipo','Bairro','Cidade','Condominio','Valor','Dormitorios','Suites','Vagas','Area_m2','Match_%','Captador'];
+  const lines=items.map(f=>{const im=f.im;return [im.id,im.tipo,im.bairro,im.cidade,im.cond,im.valor,im.dorm,im.suites,im.vagas,im.area,f.score??'',im.captador].map(v=>`"${String(v??'').replace(/"/g,'""')}"`).join(',');});
+  const csv=[`Shortlist Tinder Imob${label?' - '+label:''}`,head.join(','),...lines].join('\n');
+  const blob=new Blob(['﻿'+csv],{type:'text/csv;charset=utf-8'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`shortlist_${(label||'cliente').replace(/\s+/g,'_')}.csv`;a.click();
+}
+function exportCsv(){ csvFor(favorites, $('#cliente').value.trim()); }
+
+function toast(msg){
+  let t=$('#toast'); if(!t){ t=document.createElement('div'); t.id='toast'; document.body.appendChild(t); }
+  t.textContent=msg; t.classList.add('show'); clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove('show'),2800);
+}
+
+init();
+</script>
+</body>
+</html>
